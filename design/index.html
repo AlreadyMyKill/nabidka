@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tři směry vzhledu — WEED420SHOP</title>
+<link rel="icon" href="../icons/icon-192.png">
+<style>
+:root{
+  --pg:#0E0F0C; --pg2:#171A15; --pgline:#2A2F26;
+  --pgink:#ECEFE6; --pgink2:#AEB6A5; --pgmut:#7C856F;
+  --acc:#2EBE58;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--pg); color:var(--pgink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:72rem;margin:0 auto;padding:2rem 1.1rem 4rem;}
+
+.intro{max-width:44rem;margin-bottom:2.5rem;}
+.eyebrow{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);
+  margin:0 0 .6rem;
+}
+h1{margin:0 0 .8rem;font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.1;letter-spacing:-.025em;text-wrap:balance;}
+.intro p{margin:0 0 .7rem;color:var(--pgink2);font-size:1rem;}
+
+.grid{display:grid;gap:2.5rem;grid-template-columns:1fr;}
+@media (min-width:900px){ .grid{grid-template-columns:repeat(3,1fr);gap:1.8rem;} }
+
+.col{display:flex;flex-direction:column;gap:1rem;min-width:0;}
+.hd{display:flex;flex-direction:column;gap:.35rem;}
+.num{
+  font-family:ui-monospace,monospace;font-size:.72rem;font-weight:700;
+  letter-spacing:.14em;color:var(--pgmut);
+}
+.hd h2{margin:0;font-size:1.25rem;letter-spacing:-.015em;}
+.hd .say{color:var(--pgink2);font-size:.9rem;}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.15rem;}
+.tags span{
+  font-size:.7rem;padding:.2rem .5rem;border-radius:999px;
+  border:1px solid var(--pgline);color:var(--pgmut);
+}
+
+/* ramecek telefonu */
+.phone{
+  width:100%;max-width:20rem;margin:0 auto;
+  border:8px solid #1E211B;border-radius:30px;
+  overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.9);
+  height:34rem;overflow-y:auto;scrollbar-width:none;
+}
+.phone::-webkit-scrollbar{display:none;}
+
+.note{font-size:.85rem;color:var(--pgmut);}
+.note b{color:var(--pgink2);font-weight:600;}
+
+.verdict{
+  margin-top:3rem;padding:1.4rem 1.5rem;
+  border:1px solid var(--pgline);border-left:3px solid var(--acc);
+  border-radius:0 14px 14px 0;background:var(--pg2);max-width:46rem;
+}
+.verdict h3{margin:0 0 .6rem;font-size:1.05rem;}
+.verdict p{margin:0 0 .7rem;color:var(--pgink2);font-size:.95rem;}
+.verdict p:last-child{margin:0;}
+.verdict strong{color:var(--pgink);}
+
+/* ============ 1 · NOČNÍ PULT ============ */
+.v1{background:#08090A;color:#F2F4F0;font-size:15px;}
+.v1 .top{
+  display:flex;align-items:center;gap:.6rem;padding:.85rem .9rem .7rem;
+  position:sticky;top:0;background:rgba(8,9,10,.92);backdrop-filter:blur(12px);z-index:2;
+}
+.v1 .top img{width:1.7rem;height:1.7rem;border-radius:6px;}
+.v1 .top .nm{font-weight:600;font-size:.92rem;letter-spacing:.01em;flex:1;}
+.v1 .top .dot{width:6px;height:6px;border-radius:50%;background:#2EBE58;}
+.v1 .feed{padding:.2rem .7rem 2rem;display:flex;flex-direction:column;gap:1.6rem;}
+.v1 .post{display:flex;flex-direction:column;gap:.55rem;}
+.v1 .pic{position:relative;border-radius:16px;overflow:hidden;}
+.v1 .pic img{width:100%;height:auto;display:block;}
+.v1 .pill{
+  position:absolute;right:.6rem;bottom:.6rem;
+  background:rgba(0,0,0,.62);backdrop-filter:blur(8px);
+  padding:.28rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600;
+}
+.v1 .new{
+  position:absolute;left:.6rem;top:.6rem;
+  background:#2EBE58;color:#05170B;
+  padding:.2rem .5rem;border-radius:5px;
+  font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.v1 .lbl{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#6F776B;}
+.v1 h3{margin:0;font-size:1.02rem;font-weight:600;letter-spacing:-.01em;}
+.v1 p{margin:0;font-size:.88rem;color:#9AA396;line-height:1.5;}
+.v1 .txtonly{border-left:2px solid #23271F;padding-left:.85rem;}
+
+/* ============ 2 · STREET ============ */
+.v2{background:#0C0C0C;color:#fff;font-size:15px;}
+.v2 .top{
+  padding:.7rem .8rem;display:flex;align-items:center;gap:.6rem;
+  background:#000;border-bottom:3px solid #F2C110;
+  position:sticky;top:0;z-index:2;
+}
+.v2 .top img{width:2.2rem;height:2.2rem;border-radius:7px;}
+.v2 .top .nm{
+  font-weight:900;font-size:1.05rem;letter-spacing:.02em;
+  text-transform:uppercase;font-style:italic;
+  text-shadow:2px 2px 0 #D3341F;
+}
+.v2 .feed{padding:1rem .8rem 2rem;display:flex;flex-direction:column;gap:1.3rem;}
+.v2 .post{
+  background:#151515;border:3px solid #000;border-radius:4px;
+  box-shadow:6px 6px 0 #23A24A;overflow:hidden;position:relative;
+}
+.v2 .post.alt{box-shadow:6px 6px 0 #D3341F;}
+.v2 .post img{width:100%;height:auto;display:block;border-bottom:3px solid #000;}
+.v2 .sticker{
+  position:absolute;top:.6rem;left:-.3rem;transform:rotate(-4deg);
+  background:#D3341F;color:#fff;padding:.28rem .7rem;
+  font-size:.66rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+  border:2px solid #000;box-shadow:2px 2px 0 rgba(0,0,0,.6);
+}
+.v2 .in{padding:.75rem .8rem .85rem;}
+.v2 h3{
+  margin:0 0 .3rem;font-size:1.05rem;font-weight:900;
+  text-transform:uppercase;font-style:italic;letter-spacing:.01em;line-height:1.15;
+}
+.v2 p{margin:0;font-size:.86rem;color:#B8BDB4;}
+.v2 .cena{
+  display:inline-block;margin-top:.55rem;
+  background:#F2C110;color:#141200;font-weight:900;
+  padding:.16rem .5rem;transform:rotate(-1.5deg);font-size:.9rem;
+}
+.v2 .cas{margin-top:.55rem;font-size:.68rem;color:#6C726A;letter-spacing:.06em;text-transform:uppercase;}
+
+/* ============ 3 · DENNÍ PULT ============ */
+.v3{background:#F6F5EF;color:#161A14;font-size:15px;}
+.v3 .top{
+  display:flex;align-items:center;gap:.65rem;padding:.75rem .9rem;
+  background:#fff;border-bottom:1px solid #E3E4DA;
+  position:sticky;top:0;z-index:2;
+}
+.v3 .top img{width:2.1rem;height:2.1rem;border-radius:9px;}
+.v3 .top .nm{font-weight:750;font-size:.98rem;flex:1;letter-spacing:-.01em;}
+.v3 .top .sub{font-size:.72rem;color:#78806F;}
+.v3 .feed{padding:.9rem .8rem 2rem;display:flex;flex-direction:column;gap:.85rem;}
+.v3 .post{
+  background:#fff;border-radius:16px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(20,26,18,.06), 0 10px 24px -16px rgba(20,26,18,.35);
+}
+.v3 .picwrap{padding:.45rem .45rem 0;position:relative;}
+.v3 .post img{width:100%;height:auto;display:block;border-radius:12px;}
+.v3 .new{
+  position:absolute;top:.9rem;left:.9rem;
+  background:#1B7A3D;color:#fff;padding:.22rem .55rem;border-radius:6px;
+  font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+}
+.v3 .in{padding:.8rem .9rem 1rem;}
+.v3 h3{margin:0 0 .3rem;font-size:1.02rem;font-weight:700;letter-spacing:-.012em;}
+.v3 p{margin:0;font-size:.9rem;color:#5A6353;}
+.v3 .cena{margin-top:.5rem;font-weight:750;color:#1B7A3D;font-size:.95rem;}
+.v3 .cas{margin-top:.5rem;font-size:.74rem;color:#8B9382;}
+.v3 .txtonly .in{padding-top:.95rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="intro">
+    <p class="eyebrow">WEED420SHOP · kanál</p>
+    <h1>Tři směry vzhledu</h1>
+    <p>Stejný obsah, stejné funkce, tři různé osobnosti. Rozdíl není v tom, co appka umí — ale v tom, co o prodejně říká, když ji zákazník poprvé otevře.</p>
+    <p>Projeď si každý mockup prstem, jsou rolovatelné. Vyber jeden a ten dotáhnu.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ 1 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">SMĚR 01</span>
+        <h2>Noční pult</h2>
+        <span class="say">Fotka je hrdina, rozhraní zmizí.</span>
+        <div class="tags"><span>tmavý</span><span>klidný</span><span>drahý dojem</span></div>
+      </div>
+
+      <div class="phone v1">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <span class="nm">WEED420SHOP</span>
+          <span class="dot"></span>
+        </div>
+        <div class="feed">
+          <div class="post">
+            <div class="pic">
+              <img src="../img/produkt-3.jpg" width="1080" height="1440" alt="">
+              <span class="new">Novinka</span>
+              <span class="pill">149 Kč</span>
+            </div>
+            <span class="lbl">dnes 11:33</span>
+            <h3>T.H.C. Indica Joint</h3>
+            <p>Předbalený cone v růžové tubě. True Hemp papírky, 100% konopí.</p>
+          </div>
+          <div class="post txtonly">
+            <span class="lbl">čt 14:33</span>
+            <h3>Nová dodávka je na place</h3>
+            <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+          </div>
+          <div class="post">
+            <div class="pic">
+              <img src="../img/produkt-2.jpg" width="1080" height="1440" alt="">
+              <span class="pill">149 Kč</span>
+            </div>
+            <span class="lbl">20. 8.</span>
+            <h3>T.H.C. Sativa Joint</h3>
+            <p>Předbalený cone v zelené tubě.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Co tím říkáš:</b> jsme kvalitní obchod, ne stánek. Barvy loga schválně skoro nepoužívám — na černé vynikne zboží, ne rozhraní. <b>Riziko:</b> může působit odtažitě a od loga se to trochu vzdaluje.</p>
+    </div>
+
+    <!-- ============ 2 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">SMĚR 02</span>
+        <h2>Street</h2>
+        <span class="say">Vzhled dotažený z loga, naplno.</span>
+        <div class="tags"><span>výrazný</span><span>hravý</span><span>mladý</span></div>
+      </div>
+
+      <div class="phone v2">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <span class="nm">Weed420Shop</span>
+        </div>
+        <div class="feed">
+          <div class="post">
+            <span class="sticker">Novinka</span>
+            <img src="../img/produkt-3.jpg" width="1080" height="1440" alt="">
+            <div class="in">
+              <h3>T.H.C. Indica Joint</h3>
+              <p>Předbalený cone v růžové tubě. True Hemp papírky.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">dnes 11:33</div>
+            </div>
+          </div>
+          <div class="post alt">
+            <div class="in">
+              <h3>Nová dodávka je na place</h3>
+              <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+              <div class="cas">čt 14:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <img src="../img/produkt-2.jpg" width="1080" height="1440" alt="">
+            <div class="in">
+              <h3>T.H.C. Sativa Joint</h3>
+              <p>Předbalený cone v zelené tubě.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">20. 8.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Co tím říkáš:</b> jsme ten obchod z loga, bez servítků. Barvy, tučné kurzívy, nálepky natočené nakřivo. <b>Riziko:</b> po dvaceti zprávách to začne unavovat a fotky se v tom trochu ztrácejí.</p>
+    </div>
+
+    <!-- ============ 3 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">SMĚR 03</span>
+        <h2>Denní pult</h2>
+        <span class="say">Světlý, čitelný, dospělý.</span>
+        <div class="tags"><span>světlý</span><span>přehledný</span><span>důvěryhodný</span></div>
+      </div>
+
+      <div class="phone v3">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <div style="flex:1;min-width:0">
+            <div class="nm">WEED420SHOP</div>
+            <div class="sub">píše jen správce</div>
+          </div>
+        </div>
+        <div class="feed">
+          <div class="post">
+            <div class="picwrap">
+              <img src="../img/produkt-3.jpg" width="1080" height="1440" alt="">
+              <span class="new">Novinka</span>
+            </div>
+            <div class="in">
+              <h3>T.H.C. Indica Joint</h3>
+              <p>Předbalený cone v růžové tubě. True Hemp papírky, 100% konopí.</p>
+              <div class="cena">149 Kč / ks</div>
+              <div class="cas">dnes 11:33</div>
+            </div>
+          </div>
+          <div class="post txtonly">
+            <div class="in">
+              <h3>Nová dodávka je na place</h3>
+              <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+              <div class="cas">čt 14:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="picwrap">
+              <img src="../img/produkt-2.jpg" width="1080" height="1440" alt="">
+            </div>
+            <div class="in">
+              <h3>T.H.C. Sativa Joint</h3>
+              <p>Předbalený cone v zelené tubě.</p>
+              <div class="cena">149 Kč / ks</div>
+              <div class="cas">20. 8.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Co tím říkáš:</b> jsme normální kamenný obchod, který si vede pořádek. Nejlíp se čte na slunci i staršímu zákazníkovi. <b>Riziko:</b> vypadá to jako kterákoli jiná appka a od loga se to liší nejvíc.</p>
+    </div>
+
+  </div>
+
+  <div class="verdict">
+    <h3>Kdybych měl vybrat</h3>
+    <p><strong>Směr 01, Noční pult.</strong> Prodáváš věc, která vypadá dobře na fotce — a tenhle vzhled jí uhne z cesty. Ostatní dva si s fotkou konkurují: Street ji přebíjí barvami, Denní pult ji zmenší do kartičky.</p>
+    <p>Zároveň je nejlevnější na provoz v hlavě: čím míň rozhraní, tím míň věcí, co může u nové zprávy vypadat blbě. A když jednou nafotí zboží ve spěchu na pultě, tmavý podklad to schová líp než bílý.</p>
+    <p><strong>Kompromis, jestli chceš z loga víc:</strong> vezmi Směr 01 a přidej do něj rasta proužek pod hlavičku a žluté zvýraznění ceny ze Směru 02. Dostaneš klid i značku.</p>
+  </div>
+
+</div>
+</body>
+</html>
