@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Export náhledů</title>
+<style>
+body{margin:0;background:#151713;color:#ddd;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:1rem;}
+canvas{border:1px solid #333;margin-right:1rem;vertical-align:top;max-width:390px;height:auto;}
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script>
+/* Náhledy kreslíme přímo do canvasu.
+   Cesta přes SVG foreignObject nejde: Chrome tím canvas označí za
+   "tainted" a export do souboru zakáže. Vlastní obrázky ze stejného
+   původu canvas nešpiní, takže tudy export projde. */
+
+const W = 390;                 // sirka telefonu v CSS pixelech
+const SANS = '"Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
+const POSTY = [
+  { title:'T.H.C. Indica Joint', text:'Předbalený cone v růžové tubě. True Hemp papírky, 100% konopí.',
+    price:'149 Kč / ks', img:'../img/produkt-3.jpg', novinka:true, cas:'dnes 11:33', views:288 },
+  { title:'T.H.C. Sativa Joint', text:'Předbalený cone v zelené tubě. True Hemp papírky, 100% konopí.',
+    price:'149 Kč / ks', img:'../img/produkt-2.jpg', novinka:true, cas:'čt 14:33', views:301 },
+  { title:'T.H.C. Hybrid Joint', text:'Předbalený cone v modré tubě. True Hemp papírky, 100% konopí.',
+    price:'149 Kč / ks', img:'../img/produkt-1.jpg', novinka:false, cas:'20. 8.', views:295 },
+  { title:'', text:'Vítej v našem kanálu. Novinky a nabídku dáváme sem — nikam jinam. Zapni si upozornění, ať ti nic neuteče.',
+    price:'', img:null, novinka:false, cas:'9. 8.', views:530 }
+];
+
+function nactiObrazek(src){
+  return new Promise((res, rej) => {
+    const i = new Image();
+    i.onload = () => res(i);
+    i.onerror = () => rej(new Error('Nenačetl se ' + src));
+    i.src = src;
+  });
+}
+
+// Rozlomi text na radky tak, aby se vesel do sirky.
+function radky(g, text, max){
+  const out = [];
+  for (const odstavec of String(text).split('\n')){
+    let radek = '';
+    for (const slovo of odstavec.split(' ')){
+      const zkus = radek ? radek + ' ' + slovo : slovo;
+      if (g.measureText(zkus).width > max && radek){ out.push(radek); radek = slovo; }
+      else radek = zkus;
+    }
+    out.push(radek);
+  }
+  return out;
+}
+
+function textBlok(g, text, x, y, max, vyskaRadku){
+  for (const r of radky(g, text, max)){ g.fillText(r, x, y); y += vyskaRadku; }
+  return y;
+}
+
+// Obdelnik se zaoblenymi rohy jako cesta
+function cesta(g, x, y, w, h, r){
+  g.beginPath();
+  if (g.roundRect) g.roundRect(x, y, w, h, r);
+  else g.rect(x, y, w, h);
+}
+
+/* ---------------- STREET ---------------- */
+function kresliStreet(g, obr){
+  const RED='#D3341F', YEL='#F2C110', GRN='#23A24A';
+  let y = 0;
+
+  // hlavicka
+  g.fillStyle = '#000'; g.fillRect(0, 0, W, 56);
+  g.save(); cesta(g, 13, 9, 38, 38, 7); g.clip();
+  g.drawImage(obr.znacka, 13, 9, 38, 38); g.restore();
+
+  g.font = 'italic 900 17px ' + SANS; g.textBaseline = 'alphabetic';
+  g.fillStyle = RED; g.fillText('WEED420SHOP', 61 + 2, 27 + 2);
+  g.fillStyle = '#fff'; g.fillText('WEED420SHOP', 61, 27);
+  g.font = '600 10px ' + SANS; g.fillStyle = '#6C726A';
+  g.fillText('4 ZPRÁVY · PÍŠE JEN SPRÁVCE', 61, 42);
+
+  // lupa a tri tecky
+  g.strokeStyle = '#fff'; g.lineWidth = 2;
+  g.beginPath(); g.arc(313, 27, 6.5, 0, 7); g.stroke();
+  g.beginPath(); g.moveTo(318, 32); g.lineTo(322, 36); g.stroke();
+  g.fillStyle = '#fff';
+  for (let i = 0; i < 3; i++){ g.beginPath(); g.arc(357, 20 + i * 7, 2, 0, 7); g.fill(); }
+
+  y = 56;
+  [RED, YEL, GRN].forEach((c, i) => { g.fillStyle = c; g.fillRect(i * (W/3), y, W/3 + 1, 4); });
+  y += 4 + 16;
+
+  const P = 13, CW = W - 2 * P - 6;   // 6 px zbyde na barevny stin
+
+  // banner
+  {
+    const h = Math.round(CW * obr.banner.height / obr.banner.width);
+    g.fillStyle = RED; g.fillRect(P + 5, y + 5, CW, h + 6);
+    g.fillStyle = '#000'; g.fillRect(P, y, CW, h + 6);
+    g.drawImage(obr.banner, P + 3, y + 3, CW - 6, h);
+    y += h + 6 + 21;
+  }
+
+  const stiny = [GRN, RED, YEL];
+  POSTY.forEach((p, idx) => {
+    const stin = stiny[idx % 3];
+    const zac = y;
+
+    // nejdriv spocitam vysku karty
+    let vnitrni = 3;
+    let fotoH = 0;
+    if (p.img){ fotoH = Math.round((CW - 6) * obr[p.img].height / obr[p.img].width); vnitrni += fotoH + 3; }
+    vnitrni += 12;
+    g.font = 'italic 900 17px ' + SANS;
+    const titR = p.title ? radky(g, p.title.toUpperCase(), CW - 22) : [];
+    vnitrni += titR.length * 19;
+    g.font = '14px ' + SANS;
+    const txtR = radky(g, p.text, CW - 22);
+    vnitrni += txtR.length * 19;
+    if (p.price) vnitrni += 28;
+    vnitrni += 43;   // misto pod ucari radku s casem + spodni ramecek
+
+    g.fillStyle = stin; g.fillRect(P + 6, zac + 6, CW, vnitrni);
+    g.fillStyle = '#000'; g.fillRect(P, zac, CW, vnitrni);
+    g.fillStyle = '#151515'; g.fillRect(P + 3, zac + 3, CW - 6, vnitrni - 6);
+
+    let vy = zac + 3;
+    if (p.img){
+      g.drawImage(obr[p.img], P + 3, vy, CW - 6, fotoH);
+      g.fillStyle = '#000'; g.fillRect(P + 3, vy + fotoH, CW - 6, 3);
+      vy += fotoH + 3;
+    }
+    vy += 20;
+
+    g.textBaseline = 'alphabetic';
+    if (p.title){
+      g.font = 'italic 900 17px ' + SANS; g.fillStyle = '#fff';
+      for (const r of titR){ g.fillText(r, P + 11, vy); vy += 19; }
+      vy += 2;
+    }
+    g.font = '14px ' + SANS; g.fillStyle = '#B8BDB4';
+    for (const r of txtR){ g.fillText(r, P + 11, vy); vy += 19; }
+
+    if (p.price){
+      vy += 10;
+      g.font = '900 14px ' + SANS;
+      const w = g.measureText(p.price).width + 16;
+      g.save(); g.translate(P + 11, vy - 11); g.rotate(-1.5 * Math.PI / 180);
+      g.fillStyle = YEL; g.fillRect(0, 0, w, 21);
+      g.fillStyle = '#141200'; g.fillText(p.price, 8, 15);
+      g.restore();
+      vy += 18;
+    }
+
+    vy += 18;
+    g.font = '600 10px ' + SANS; g.fillStyle = '#6C726A';
+    g.fillText(p.cas.toUpperCase() + '  ·  ' + p.views, P + 11, vy);
+
+    // nalepka precniva pres okraj karty
+    if (p.novinka){
+      g.save(); g.translate(P - 4, zac + 11); g.rotate(-4 * Math.PI / 180);
+      g.font = '900 10px ' + SANS;
+      const w = g.measureText('NOVINKA').width + 20;
+      g.fillStyle = 'rgba(0,0,0,.6)'; g.fillRect(2, 2, w, 21);
+      g.fillStyle = '#000'; g.fillRect(0, 0, w, 21);
+      g.fillStyle = RED; g.fillRect(2, 2, w - 4, 17);
+      g.fillStyle = '#fff'; g.fillText('NOVINKA', 10, 15);
+      g.restore();
+    }
+
+    y = zac + vnitrni + 21;
+  });
+
+  return y + 5;
+}
+
+/* ---------------- NOČNÍ PULT ---------------- */
+function kresliNocni(g, obr){
+  let y = 0;
+  g.fillStyle = '#08090A'; g.fillRect(0, 0, W, 52);
+  g.save(); cesta(g, 14, 14, 27, 27, 6); g.clip();
+  g.drawImage(obr.znacka, 14, 14, 27, 27); g.restore();
+  g.textBaseline = 'alphabetic';
+  g.font = '600 14px ' + SANS; g.fillStyle = '#F2F4F0';
+  g.fillText('WEED420SHOP', 50, 32);
+  g.fillStyle = '#2EBE58'; g.beginPath(); g.arc(370, 28, 3, 0, 7); g.fill();
+
+  y = 55;
+  const P = 11, CW = W - 2 * P;
+
+  POSTY.forEach(p => {
+    if (p.img){
+      const h = Math.round(CW * obr[p.img].height / obr[p.img].width);
+      g.save(); cesta(g, P, y, CW, h, 16); g.clip();
+      g.drawImage(obr[p.img], P, y, CW, h);
+      g.restore();
+
+      // cenovka
+      g.font = '600 12px ' + SANS;
+      const cw = g.measureText(p.price.replace(' / ks','')).width + 20;
+      g.save(); cesta(g, P + CW - cw - 10, y + h - 34, cw, 24, 12);
+      g.fillStyle = 'rgba(0,0,0,.72)'; g.fill(); g.restore();
+      g.fillStyle = '#F2F4F0'; g.fillText(p.price.replace(' / ks',''), P + CW - cw, y + h - 17);
+
+      if (p.novinka){
+        g.font = '800 9px ' + SANS;
+        const nw = g.measureText('NOVINKA').width + 16;
+        g.save(); cesta(g, P + 10, y + 10, nw, 18, 5); g.fillStyle = '#2EBE58'; g.fill(); g.restore();
+        g.fillStyle = '#05170B'; g.fillText('NOVINKA', P + 18, y + 23);
+      }
+      y += h + 9;
+    } else {
+      // linka musi sahat pod text, takze si napred spocitam vysku bloku
+      let vys = 26 + 4;
+      if (p.title){ g.font = '600 16px ' + SANS; vys += radky(g, p.title, CW - 20).length * 21 + 3; }
+      g.font = '14px ' + SANS;
+      vys += radky(g, p.text, CW - 28).length * 20;
+      g.fillStyle = '#23271F'; g.fillRect(P, y, 2, vys);
+    }
+
+    const x = p.img ? P : P + 14;
+    g.font = '600 10px ' + SANS; g.fillStyle = '#6F776B';
+    g.fillText(p.cas.toUpperCase(), x, y + 10);
+    y += 26;
+
+    if (p.title){
+      g.font = '600 16px ' + SANS; g.fillStyle = '#F2F4F0';
+      y = textBlok(g, p.title, x, y, CW - 20, 21) + 3;
+    }
+    g.font = '14px ' + SANS; g.fillStyle = '#9AA396';
+    y = textBlok(g, p.text, x, y, CW - (p.img ? 14 : 28), 20);
+    y += 22;
+  });
+
+  return y;
+}
+
+/* ---------------- export ---------------- */
+async function vyrob(kresli, pozadi, scale){
+  const zdroje = { znacka:'../img/znacka.png', banner:'../img/banner.jpg' };
+  POSTY.forEach(p => { if (p.img) zdroje[p.img] = p.img; });
+  const obr = {};
+  for (const [k, src] of Object.entries(zdroje)) obr[k] = await nactiObrazek(src);
+
+  // kreslime do velkorysého platna a pak orizneme na skutecnou vysku
+  const hrube = document.createElement('canvas');
+  hrube.width = W * scale; hrube.height = 5000 * scale;
+  const g = hrube.getContext('2d');
+  g.scale(scale, scale);
+  g.fillStyle = pozadi; g.fillRect(0, 0, W, 5000);
+  const h = Math.ceil(kresli(g, obr));
+
+  const c = document.createElement('canvas');
+  c.width = W * scale; c.height = h * scale;
+  c.getContext('2d').drawImage(hrube, 0, 0);
+  return { data: c.toDataURL('image/jpeg', 0.92), w: c.width, h: c.height, canvas: c };
+}
+
+window.__vyrob = vyrob;
+window.__street = () => vyrob(kresliStreet, '#0C0C0C', 2);
+window.__nocni  = () => vyrob(kresliNocni,  '#08090A', 2);
+</script>
+</body>
+</html>
