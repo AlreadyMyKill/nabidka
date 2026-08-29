@@ -1,4 +1,4 @@
-const CACHE = 'w420-v2';
+const CACHE = 'w420-v3';
 
 const ASSETS = [
   './',
@@ -6,8 +6,10 @@ const ASSETS = [
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/icon-512-maskable.png',
   './icons/icon-180.png',
-  './img/logo.png',
+  './img/znacka.png',
+  './img/banner.jpg',
   './img/produkt-1.jpg',
   './img/produkt-2.jpg',
   './img/produkt-3.jpg'
@@ -16,6 +18,7 @@ const ASSETS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
+      // allSettled: chybejici soubor nesmi shodit celou instalaci
       .then(c => Promise.allSettled(ASSETS.map(a => c.add(a))))
       .then(() => self.skipWaiting())
   );

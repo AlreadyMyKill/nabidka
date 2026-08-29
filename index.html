@@ -112,11 +112,17 @@ img{max-width:100%;display:block;}
 }
 .msg.pinned{border-color:var(--yellow);}
 .shot{position:relative;background:var(--surface-2);}
-.shot img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+/* Fotka si nese vlastni pomer stran - nic se neoreza.
+   width/height v HTML drzi misto, takze pri nacitani neposkakuje layout. */
+.shot img{width:100%;height:auto;display:block;}
 .ph{
-  aspect-ratio:4/3;display:flex;flex-direction:column;
+  aspect-ratio:var(--ar,4/3);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:.4rem;color:#fff;
 }
+
+/* uvodni banner, odroluje pryc */
+.cover{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000;}
+.cover img{width:100%;height:auto;display:block;}
 .ph .nm{font-weight:800;font-size:1rem;letter-spacing:.03em;text-shadow:0 1px 4px rgba(0,0,0,.4);}
 .ph .hint{font-size:.72rem;opacity:.85;}
 .ph.b{background:linear-gradient(150deg,#123B63,#2E7FC4);}
@@ -234,7 +240,7 @@ img{max-width:100%;display:block;}
 <header class="topbar">
   <div class="brandrow">
     <div class="logo">
-      <img src="img/logo.png" alt="WEED420SHOP" onerror="this.remove();document.getElementById('lf').hidden=false">
+      <img src="img/znacka.png" width="160" height="160" alt="WEED420SHOP" onerror="this.remove();document.getElementById('lf').hidden=false">
       <span class="lf" id="lf" hidden>🌿</span>
     </div>
     <div class="who">
@@ -274,22 +280,22 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 const SEED = [
-  { id:'m5', pinned:true, ph:'n', img:null,
+  { id:'m5', pinned:true, ph:null, img:null,
     title:'Otevírací doba',
     text:'Po–Pá  10:00–19:00\nSo  10:00–16:00\nNe  zavřeno\n\nNajdeš nás na [ADRESA].',
     price:'', time:'po 9:12', views:412 },
 
-  { id:'m4', ph:'p', img:'img/produkt-3.jpg', badge:'new',
+  { id:'m4', ph:'p', img:'img/produkt-3.jpg', w:1080, h:1440, ar:'3/4', badge:'new',
     title:'T.H.C. Indica Joint',
     text:'Předbalený cone v růžové tubě. True Hemp papírky, 100% konopí.',
     price:'[CENA] Kč / ks', time:'út 16:40', views:288 },
 
-  { id:'m3', ph:'g', img:'img/produkt-2.jpg',
+  { id:'m3', ph:'g', img:'img/produkt-2.jpg', w:1080, h:1440, ar:'3/4',
     title:'T.H.C. Sativa Joint',
     text:'Předbalený cone v zelené tubě. True Hemp papírky, 100% konopí.',
     price:'[CENA] Kč / ks', time:'út 16:38', views:301 },
 
-  { id:'m2', ph:'b', img:'img/produkt-1.jpg',
+  { id:'m2', ph:'b', img:'img/produkt-1.jpg', w:1080, h:1440, ar:'3/4',
     title:'T.H.C. Hybrid Joint',
     text:'Předbalený cone v modré tubě. True Hemp papírky, 100% konopí.',
     price:'[CENA] Kč / ks', time:'út 16:35', views:295 },
@@ -327,24 +333,28 @@ function render(){
     $('#pintxt').textContent = pin.title || pin.text.split('\n')[0];
   } else pb.hidden = true;
 
+  // banner jen v nefiltrovanem pohledu
+  const cover = q ? '' :
+    '<div class="cover"><img src="img/banner.jpg" width="1200" height="450" alt="WEED420SHOP" onerror="this.closest(\'.cover\').remove()"></div>';
+
   if (!list.length){
-    feed.innerHTML = '<p class="empty">Nic nenalezeno.</p>';
+    feed.innerHTML = cover + '<p class="empty">Nic nenalezeno.</p>';
     return;
   }
 
   const ordered = [...list].sort((a,b) => (b.pinned?1:0) - (a.pinned?1:0));
-  feed.innerHTML = ordered.map(m => {
+  feed.innerHTML = cover + ordered.map(m => {
     const tags = [];
     if (m.pinned) tags.push('<span class="tag pin">Připnuto</span>');
     if (m.badge === 'new') tags.push('<span class="tag new">Novinka</span>');
 
     let shot = '';
     if (m.img || m.ph){
-      const fallback = m.ph
-        ? `<div class="ph ${m.ph}"><span class="nm">${esc(m.title||'WEED420SHOP')}</span><span class="hint">sem přijde fotka</span></div>`
-        : '';
+      const pic = m.img
+        ? `<img src="${esc(m.img)}"${m.w ? ` width="${m.w}" height="${m.h}"` : ''} loading="lazy" decoding="async" alt="${esc(m.title)}" data-ph="${esc(m.ph||'')}" data-ar="${esc(m.ar||'4/3')}">`
+        : `<div class="ph ${m.ph}" style="--ar:${esc(m.ar||'4/3')}"><span class="nm">${esc(m.title||'WEED420SHOP')}</span><span class="hint">sem přijde fotka</span></div>`;
       shot = `<div class="shot">
-        ${m.img ? `<img src="${esc(m.img)}" alt="${esc(m.title)}" onerror="this.outerHTML=${JSON.stringify(fallback).replace(/"/g,'&quot;')}">` : fallback}
+        ${pic}
         ${tags.length ? `<div class="tagline">${tags.join('')}</div>` : ''}
       </div>`;
     } else if (tags.length){
@@ -365,6 +375,17 @@ function render(){
       </div>
     </article>`;
   }).join('');
+
+  // chybejici fotka -> barevna plocha se stejnym pomerem stran
+  feed.querySelectorAll('.shot img').forEach(im => {
+    im.addEventListener('error', () => {
+      const d = document.createElement('div');
+      d.className = 'ph ' + (im.dataset.ph || 'n');
+      d.style.setProperty('--ar', im.dataset.ar || '4/3');
+      d.innerHTML = `<span class="nm">${esc(im.alt || 'WEED420SHOP')}</span><span class="hint">sem přijde fotka</span>`;
+      im.replaceWith(d);
+    }, { once:true });
+  });
 
   feed.querySelectorAll('[data-menu]').forEach(b =>
     b.addEventListener('click', () => menu(b.dataset.menu)));
