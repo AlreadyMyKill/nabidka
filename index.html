@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nabídka — aplikace pro vaši prodejnu</title>
-<meta name="description" content="Privátní katalog nabídky v telefonu vašich zákazníků.">
+<title>Nabídka pro WEED420SHOP</title>
+<meta name="description" content="Vlastní katalog nabídky v telefonu tvých zákazníků.">
 
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#142E1C">
@@ -13,39 +13,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Nabídka">
+<meta name="apple-mobile-web-app-title" content="WEED420SHOP">
 
 <style>
 :root{
-  --bg:#F6F8F4;
-  --card:#FFFFFF;
-  --ink:#131A13;
-  --ink-2:#3A4437;
-  --muted:#6C7869;
-  --line:#E0E6DB;
-  --line-2:#CBD4C4;
-  --brand:#1E4A2C;
-  --brand-ink:#2E6B3E;
-  --brand-soft:#E7EFE5;
+  --bg:#F6F8F4; --card:#FFFFFF;
+  --ink:#131A13; --ink-2:#3A4437; --muted:#6C7869;
+  --line:#E0E6DB; --line-2:#CBD4C4;
+  --brand:#1E4A2C; --brand-ink:#2E6B3E; --brand-soft:#E7EFE5;
   --sale:#A8342A;
-  --sale-soft:#F9EBE9;
   --shadow:0 1px 2px rgba(19,26,19,.05), 0 6px 20px -10px rgba(19,26,19,.18);
   --bar:rgba(246,248,244,.88);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#0C100B;
-    --card:#141A13;
-    --ink:#E9EEE6;
-    --ink-2:#C3CCBE;
-    --muted:#8B9787;
-    --line:#232B21;
-    --line-2:#36402F;
-    --brand:#7FCB8D;
-    --brand-ink:#7FCB8D;
-    --brand-soft:#16220F;
+    --bg:#0C100B; --card:#141A13;
+    --ink:#E9EEE6; --ink-2:#C3CCBE; --muted:#8B9787;
+    --line:#232B21; --line-2:#36402F;
+    --brand:#7FCB8D; --brand-ink:#7FCB8D; --brand-soft:#16220F;
     --sale:#EC8878;
-    --sale-soft:#2A1512;
     --shadow:0 1px 2px rgba(0,0,0,.5), 0 6px 20px -10px rgba(0,0,0,.7);
     --bar:rgba(12,16,11,.88);
   }
@@ -54,18 +40,15 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;}
 body{
-  background:var(--bg);
-  color:var(--ink);
+  background:var(--bg); color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-size:16px;
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-  overscroll-behavior-y:none;
+  font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overscroll-behavior-y:none;
 }
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
 :focus-visible{outline:2px solid var(--brand-ink);outline-offset:2px;border-radius:6px;}
 
-/* ---------------- header ---------------- */
+/* ---------- hlavicka ---------- */
 .topbar{
   position:sticky;top:0;z-index:40;
   background:var(--bar);
@@ -74,187 +57,107 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   border-bottom:1px solid var(--line);
   padding-top:env(safe-area-inset-top);
 }
-.brandrow{
-  display:flex;align-items:center;gap:.7rem;
-  padding:.7rem 1rem .55rem;
-}
-.mark{
-  width:2rem;height:2rem;border-radius:8px;background:var(--brand);
-  display:grid;place-items:center;flex:none;
-}
+.brandrow{display:flex;align-items:center;gap:.7rem;padding:.7rem 1rem .55rem;}
+.mark{width:2rem;height:2rem;border-radius:8px;background:var(--brand);display:grid;place-items:center;flex:none;}
 .mark svg{width:1.15rem;height:1.15rem;display:block;}
-.brandtext{display:flex;flex-direction:column;line-height:1.15;min-width:0;}
-.brandtext .n{font-weight:650;font-size:.98rem;letter-spacing:-.01em;}
-.brandtext .s{font-size:.72rem;color:var(--muted);}
+.brandtext{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
+.brandtext .n{font-weight:700;font-size:.95rem;letter-spacing:-.005em;}
+.brandtext .s{font-size:.73rem;color:var(--muted);}
 
-/* chips */
-.chips{
-  display:flex;gap:.4rem;overflow-x:auto;padding:0 1rem .65rem;
-  scrollbar-width:none;-ms-overflow-style:none;
-}
+.chips{display:flex;gap:.4rem;overflow-x:auto;padding:0 1rem .65rem;scrollbar-width:none;-ms-overflow-style:none;}
 .chips::-webkit-scrollbar{display:none;}
 .chip{
-  flex:none;
-  padding:.36rem .8rem;border-radius:999px;
+  flex:none;padding:.36rem .8rem;border-radius:999px;
   border:1px solid var(--line-2);
-  font-size:.83rem;font-weight:550;color:var(--ink-2);
-  white-space:nowrap;transition:background .15s,color .15s,border-color .15s;
+  font-size:.83rem;font-weight:550;color:var(--ink-2);white-space:nowrap;
 }
-.chip[aria-selected="true"]{
-  background:var(--brand);border-color:var(--brand);
-  color:#F2F8F1;
-}
-@media (prefers-color-scheme: dark){
-  .chip[aria-selected="true"]{color:#0C100B;}
-}
+.chip[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#F2F8F1;}
+@media (prefers-color-scheme: dark){ .chip[aria-selected="true"]{color:#0C100B;} }
 
-/* ---------------- install banner ---------------- */
+/* ---------- vyzva k instalaci ---------- */
 .install{
-  margin:.85rem 1rem 0;
-  background:var(--brand-soft);
-  border:1px solid var(--line-2);
-  border-radius:12px;
-  padding:.85rem .95rem;
-  display:flex;gap:.75rem;align-items:flex-start;
-  font-size:.88rem;
+  margin:.85rem 1rem 0;background:var(--brand-soft);border:1px solid var(--line-2);
+  border-radius:12px;padding:.85rem .95rem;display:flex;gap:.75rem;align-items:flex-start;font-size:.88rem;
 }
 .install svg{width:1.15rem;height:1.15rem;flex:none;margin-top:.1rem;color:var(--brand-ink);}
-.install .t{font-weight:650;display:block;margin-bottom:.15rem;}
-.install .x{margin-left:auto;color:var(--muted);font-size:1.35rem;line-height:1;padding:0 .15rem;flex:none;}
-.install button.act{
-  margin-top:.5rem;background:var(--brand);color:#F2F8F1;
-  padding:.45rem .85rem;border-radius:8px;font-size:.85rem;font-weight:600;
-}
+.install .t{font-weight:700;display:block;margin-bottom:.15rem;}
+.install .x{margin-left:auto;color:var(--muted);font-size:1.35rem;line-height:1;flex:none;}
+.install button.act{margin-top:.5rem;background:var(--brand);color:#F2F8F1;padding:.45rem .85rem;border-radius:8px;font-size:.85rem;font-weight:600;}
 @media (prefers-color-scheme: dark){ .install button.act{color:#0C100B;} }
 
-/* ---------------- feed ---------------- */
-.feed{
-  padding:.85rem 1rem calc(2.5rem + env(safe-area-inset-bottom));
-  display:flex;flex-direction:column;gap:.85rem;
-  max-width:34rem;margin:0 auto;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  text-align:left;width:100%;display:block;
-  transition:transform .12s ease;
-}
+/* ---------- zed ---------- */
+.feed{padding:.85rem 1rem calc(2rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:.85rem;max-width:34rem;margin:0 auto;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);width:100%;transition:transform .12s ease;}
 .card:active{transform:scale(.988);}
-.thumb{
-  position:relative;
-  aspect-ratio:16/9;
-  display:flex;align-items:flex-end;
-  padding:.75rem .85rem;
-}
-.thumb .kicker{
-  font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:rgba(255,255,255,.92);
-  text-shadow:0 1px 3px rgba(0,0,0,.35);
-}
+.thumb{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-end;padding:.75rem .85rem;}
+.thumb .kicker{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.35);}
 .badges{position:absolute;top:.7rem;left:.85rem;display:flex;gap:.35rem;}
-.badge{
-  font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-  padding:.24rem .5rem;border-radius:6px;
-  background:rgba(255,255,255,.94);color:var(--brand);
-}
+.badge{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.24rem .5rem;border-radius:6px;background:rgba(255,255,255,.94);color:var(--brand);}
 .badge.sale{background:var(--sale);color:#fff;}
-.fav{
-  position:absolute;top:.55rem;right:.6rem;
-  width:2.1rem;height:2.1rem;border-radius:999px;
-  background:rgba(255,255,255,.9);
-  display:grid;place-items:center;
-}
+.fav{position:absolute;top:.55rem;right:.6rem;width:2.1rem;height:2.1rem;border-radius:999px;background:rgba(255,255,255,.9);display:grid;place-items:center;}
 .fav svg{width:1.15rem;height:1.15rem;color:#5D6A59;}
 .fav[aria-pressed="true"] svg{color:#C6392B;fill:#C6392B;}
 .cbody{padding:.8rem .95rem 1rem;display:flex;flex-direction:column;gap:.3rem;}
-.cbody h2{margin:0;font-size:1.03rem;font-weight:650;letter-spacing:-.012em;line-height:1.3;}
+.cbody h2{margin:0;font-size:1.05rem;font-weight:700;letter-spacing:-.012em;line-height:1.3;}
 .cbody p{margin:0;font-size:.9rem;color:var(--muted);}
-.cmeta{
-  display:flex;align-items:center;gap:.45rem;margin-top:.3rem;
-  font-size:.75rem;color:var(--brand-ink);font-weight:600;
-}
+.cmeta{display:flex;gap:.45rem;margin-top:.35rem;font-size:.75rem;color:var(--brand-ink);font-weight:600;}
 
-/* thumb gradients */
 .g1{background:linear-gradient(135deg,#1E4A2C,#2E6B3E 55%,#48885A);}
 .g2{background:linear-gradient(135deg,#25443A,#356B57 55%,#4E9179);}
-.g3{background:linear-gradient(135deg,#3A3F22,#5C6533 55%,#7E8A48);}
-.g4{background:linear-gradient(135deg,#1C3A44,#2B5C68 55%,#3E838F);}
-.g5{background:linear-gradient(135deg,#43301F,#6B4C2E 55%,#8E6A45);}
-.g6{background:linear-gradient(135deg,#2E2140,#4A3568 55%,#66508A);}
+.g3{background:linear-gradient(135deg,#1C3A44,#2B5C68 55%,#3E838F);}
+.g4{background:linear-gradient(135deg,#43301F,#6B4C2E 55%,#8E6A45);}
+.g5{background:linear-gradient(135deg,#2E2140,#4A3568 55%,#66508A);}
 
-/* ---------------- detail ---------------- */
+/* ---------- detail ---------- */
 .detail{
-  position:fixed;inset:0;z-index:60;
-  background:var(--bg);
+  position:fixed;inset:0;z-index:60;background:var(--bg);
   overflow-y:auto;-webkit-overflow-scrolling:touch;
-  transform:translateX(100%);
-  transition:transform .24s cubic-bezier(.32,.72,0,1);
-  visibility:hidden;
+  transform:translateX(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);visibility:hidden;
 }
 .detail.open{transform:translateX(0);visibility:visible;}
 .dbar{
-  position:sticky;top:0;z-index:2;
-  background:var(--bar);
-  backdrop-filter:saturate(180%) blur(14px);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid var(--line);
-  padding-top:env(safe-area-inset-top);
-  display:flex;align-items:center;gap:.5rem;
+  position:sticky;top:0;z-index:2;background:var(--bar);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top);display:flex;
 }
 .dbar button{display:flex;align-items:center;gap:.3rem;padding:.75rem 1rem;font-size:.95rem;color:var(--brand-ink);font-weight:600;}
 .dbar svg{width:1.1rem;height:1.1rem;}
 .dhero{aspect-ratio:16/9;display:flex;align-items:flex-end;padding:1rem;}
 .dhero .kicker{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.35);}
+
 .dcontent{
-  padding:1.25rem 1.15rem calc(3.5rem + env(safe-area-inset-bottom));
+  padding:1.25rem 1.15rem calc(3rem + env(safe-area-inset-bottom));
   max-width:34rem;margin:0 auto;
-  display:flex;flex-direction:column;gap:.9rem;
+  display:flex;flex-direction:column;gap:1.05rem;
 }
 .dcontent h1{margin:0;font-size:1.5rem;line-height:1.2;letter-spacing:-.02em;font-weight:700;text-wrap:balance;}
 .dcontent p{margin:0;font-size:.97rem;color:var(--ink-2);}
-.dcontent h3{margin:.7rem 0 0;font-size:.98rem;font-weight:650;}
+.dcontent h3{margin:.5rem 0 0;font-size:.95rem;font-weight:700;}
 .dcontent ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.5rem;}
-.dcontent ul li{display:grid;grid-template-columns:1.05rem 1fr;gap:.5rem;font-size:.94rem;color:var(--ink-2);}
+.dcontent ul li{display:grid;grid-template-columns:1.05rem 1fr;gap:.5rem;font-size:.95rem;color:var(--ink-2);}
 .dcontent ul li::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:var(--brand-ink);margin-top:.52rem;margin-left:.3rem;}
-.dcontent ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.75rem;counter-reset:s;}
-.dcontent ol li{display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem;font-size:.94rem;color:var(--ink-2);counter-increment:s;}
-.dcontent ol li::before{content:counter(s,decimal-leading-zero);font-size:.75rem;font-weight:700;color:var(--brand-ink);padding-top:.16rem;}
-.dcontent strong{color:var(--ink);font-weight:650;}
+.dcontent ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.65rem;counter-reset:s;}
+.dcontent ol li{display:grid;grid-template-columns:1.5rem 1fr;gap:.55rem;font-size:.95rem;color:var(--ink-2);counter-increment:s;}
+.dcontent ol li::before{content:counter(s);font-size:.8rem;font-weight:700;color:var(--brand-ink);padding-top:.14rem;}
+.dcontent strong{color:var(--ink);font-weight:700;}
 
 .rows{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);}
-.row{display:flex;justify-content:space-between;gap:.9rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);font-size:.92rem;}
+.row{display:flex;justify-content:space-between;gap:.9rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);font-size:.93rem;}
 .row:last-child{border-bottom:0;}
 .row span:first-child{color:var(--muted);}
 .row b{white-space:nowrap;font-variant-numeric:tabular-nums;}
-.row.big{background:var(--brand-soft);font-size:1rem;}
+.row.big{background:var(--brand-soft);}
 .row.big b{font-size:1.15rem;}
 
-.callout{
-  background:var(--brand-soft);border-left:3px solid var(--brand-ink);
-  border-radius:0 10px 10px 0;padding:.85rem 1rem;font-size:.93rem;color:var(--ink-2);
-}
+.callout{background:var(--brand-soft);border-left:3px solid var(--brand-ink);border-radius:0 10px 10px 0;padding:.8rem .95rem;font-size:.93rem;color:var(--ink-2);}
 .callout strong{color:var(--brand-ink);}
 
-.fill{
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:.85em;background:var(--brand-soft);color:var(--brand-ink);
-  padding:.08em .4em;border-radius:4px;white-space:nowrap;
-}
+.fill{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;background:var(--brand-soft);color:var(--brand-ink);padding:.08em .4em;border-radius:4px;white-space:nowrap;}
 
-footer.appfoot{
-  border-top:1px solid var(--line);
-  margin-top:.6rem;padding:1.5rem 1rem calc(2rem + env(safe-area-inset-bottom));
-  text-align:center;font-size:.82rem;color:var(--muted);
-  display:flex;flex-direction:column;gap:.35rem;
-}
+footer.appfoot{border-top:1px solid var(--line);margin-top:.4rem;padding:1.4rem 1rem calc(2rem + env(safe-area-inset-bottom));text-align:center;font-size:.82rem;color:var(--muted);display:flex;flex-direction:column;gap:.3rem;}
 footer.appfoot b{color:var(--ink);font-size:.9rem;}
 
-@media (prefers-reduced-motion: reduce){
-  *{transition:none !important;animation:none !important;}
-}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 </style>
 </head>
 <body>
@@ -269,8 +172,8 @@ footer.appfoot b{color:var(--ink);font-size:.9rem;}
       </svg>
     </div>
     <div class="brandtext">
-      <span class="n">Nabídka aplikace</span>
-      <span class="s">pro <span class="fill">[NÁZEV PRODEJNY]</span></span>
+      <span class="n">WEED420SHOP</span>
+      <span class="s">nabídka na appku</span>
     </div>
   </div>
   <div class="chips" role="tablist" id="chips"></div>
@@ -281,8 +184,7 @@ footer.appfoot b{color:var(--ink);font-size:.9rem;}
 
 <footer class="appfoot">
   <b>Jan Fiedler</b>
-  <span>vývoj aplikací &middot; <span class="fill">[TELEFON]</span></span>
-  <span>Nabídka platí 30 dní od předání.</span>
+  <span><span class="fill">[TELEFON]</span></span>
 </footer>
 
 <section class="detail" id="detail" aria-hidden="true">
@@ -298,207 +200,145 @@ footer.appfoot b{color:var(--ink);font-size:.9rem;}
 
 <script>
 const CATS = [
-  {id:'vse',    label:'Vše'},
-  {id:'proc',   label:'Proč to takhle'},
-  {id:'funkce', label:'Co to umí'},
-  {id:'cena',   label:'Cena'},
-  {id:'postup', label:'Postup'}
+  {id:'vse',     label:'Vše'},
+  {id:'cotoje',  label:'Co to je'},
+  {id:'funkce',  label:'Co to umí'},
+  {id:'cena',    label:'Cena'},
+  {id:'domluva', label:'Domluva'}
 ];
 
 const POSTS = [
 {
-  id:'pitch', cat:'proc', g:'g1', kicker:'Shrnutí', pinned:true,
-  title:'Aplikace, kterou vám nikdo nemůže vypnout',
-  excerpt:'Vlastní katalog nabídky v telefonu vašich zákazníků. Mimo dosah Telegramu, App Store i Google Play.',
+  id:'pitch', cat:'cotoje', g:'g1', kicker:'Shrnutí', pinned:true,
+  title:'Co ti postavím',
+  excerpt:'Vlastní katalog v telefonu tvých zákazníků. Nikdo ti ho nevypne.',
   body:`
-    <p>Postavím vám <strong>privátní katalog nabídky</strong>, který si zákazník přidá na plochu telefonu. Dostane se do něj jen přes QR kód, který mu dáte v prodejně.</p>
-    <p>Poběží na vaší doméně a vašem serveru. Neschvaluje ho žádný obchod s aplikacemi, takže ho žádný obchod s aplikacemi nemůže zamítnout ani smazat.</p>
+    <p>Appka, kterou si zákazník přidá na plochu telefonu. Dovnitř se dostane jen přes QR kód, co mu dáš na place.</p>
+    <p>Poběží na <strong>tvojí doméně a tvým serveru</strong>. Neschvaluje to žádný app store — takže to ani žádný app store nemůže zrušit.</p>
     <div class="rows">
       <div class="row big"><span>Vývoj</span><b>60 000 Kč</b></div>
-      <div class="row"><span>Provoz a údržba</span><b>2 500 Kč / měs</b></div>
-      <div class="row"><span>Termín</span><b>8 týdnů</b></div>
-    </div>
-    <div class="callout"><strong>Tahle nabídka je zároveň ukázka.</strong> To, v čem ji právě čtete, je funkční prototyp vaší budoucí aplikace.</div>`
+      <div class="row"><span>Provoz</span><b>2 500 Kč / měs</b></div>
+      <div class="row"><span>Hotovo za</span><b>8 týdnů</b></div>
+    </div>`
 },
 {
-  id:'meta', cat:'proc', g:'g2', kicker:'Ukázka',
-  title:'Právě používáte to, co vám nabízím',
-  excerpt:'Tohle není dokument o aplikaci. Tohle je ta aplikace — jen místo produktů má uvnitř nabídku.',
+  id:'meta', cat:'cotoje', g:'g2', kicker:'Ukázka',
+  title:'Tohle je ta appka',
+  excerpt:'Nečteš dokument o aplikaci. Čteš tu aplikaci.',
   body:`
-    <p>Všechno, co jste za posledních třicet vteřin udělal, bude dělat i váš zákazník:</p>
+    <p>Všechno, cos právě udělal, budou dělat i tvoji zákazníci:</p>
     <ul>
-      <li><strong>Zeď příspěvků</strong> — nejnovější nahoře, přesně jako na Telegramu</li>
-      <li><strong>Připnutý příspěvek</strong> — první karta zůstává nahoře, ať přidáte cokoli</li>
-      <li><strong>Filtr kategorií</strong> — lišta nahoře, kategorie si spravujete sám</li>
-      <li><strong>Detail po klepnutí</strong> — celá obrazovka s popisem a cenou</li>
-      <li><strong>Srdíčko</strong> — oblíbené položky se uloží do telefonu</li>
-      <li><strong>Ikona na ploše</strong> — otevírá se na celou obrazovku, bez prohlížeče</li>
+      <li>Zeď příspěvků, nejnovější nahoře</li>
+      <li>Připnutý příspěvek zůstává první</li>
+      <li>Kategorie v liště nahoře</li>
+      <li>Detail po klepnutí</li>
+      <li>Srdíčko = oblíbené</li>
+      <li>Ikona na ploše, bez prohlížeče</li>
     </ul>
-    <div class="callout"><strong>Vyzkoušejte si tohle:</strong> zapněte si režim letadlo a projděte nabídku znovu. Funguje dál — aplikace je uložená v telefonu. Zákazník ji otevře i ve sklepě bez signálu.</div>
-    <p>Ve vaší verzi budou místo těchto barevných ploch fotky vašich produktů.</p>`
+    <div class="callout"><strong>Zkus si režim letadla</strong> a projdi to znovu. Jede to dál.</div>
+    <p>Místo těch barevných ploch tam budou fotky tvýho zboží.</p>`
 },
 {
-  id:'problem', cat:'proc', g:'g3', kicker:'Zadání',
-  title:'Co řešíme',
-  excerpt:'O skupinu na Telegramu jste nepřišel vlastním rozhodnutím. To se nesmí opakovat.',
+  id:'flow', cat:'funkce', g:'g3', kicker:'Jak se tam lidi dostanou',
+  title:'QR kód z obchodu',
+  excerpt:'Naskenuje, potvrdí 18+, hotovo. Žádná registrace.',
   body:`
-    <p>Nabídku jste posílal do skupiny na Telegramu. Ta byla zrušena a s ní i přímý kanál k zákazníkům, který jste roky budoval.</p>
-    <p>Podstatné není samotné zrušení. Podstatné je, že <strong>rozhodnutí nebylo vaše</strong> a nešlo se proti němu odvolat. Dokud budete stát na cizí platformě, může se to zopakovat kdykoli.</p>
-    <h3>Proč to nejde do App Store</h3>
-    <p>Apple i Google zamítají aplikace prodejen s konopnými produkty plošně, bez ohledu na to, že prodáváte legální zboží. Byla by to jen dražší varianta téhož, co se stalo na Telegramu — a zjistili bychom to až po třech měsících práce.</p>
-    <p>Proto stavíme mimo obchody s aplikacemi. Není to obcházení pravidel, je to jediná cesta, která vám nemůže být vypnuta.</p>`
-},
-{
-  id:'flow', cat:'funkce', g:'g4', kicker:'Cesta zákazníka',
-  title:'Jak se k aplikaci dostane zákazník',
-  excerpt:'QR kód z prodejny, potvrzení věku, hotovo. Žádná registrace, žádné stahování.',
-  body:`
-    <p>Aplikace je neveřejná. Nenajde ji nikdo ve vyhledávání a bez přístupového kódu z prodejny se do ní nedostane.</p>
+    <p>Appka je neveřejná. Nikdo ji nenajde a bez kódu se dovnitř nedostane.</p>
     <ol>
-      <li><strong>Dáte mu v prodejně QR kód.</strong> Na kartičce, účtence nebo samolepce u kasy. Kód nese přístup v sobě, nikdo nic nepřepisuje.</li>
-      <li><strong>Naskenuje ho a potvrdí věk 18+.</strong> Katalog se otevře hned, bez registrace a bez osobních údajů.</li>
-      <li><strong>Přidá si aplikaci na plochu.</strong> Aplikace ho k tomu sama navede.</li>
-      <li><strong>Povolí upozornění.</strong> Když vypustíte novou nabídku, přistane mu na displeji.</li>
+      <li>Dáš mu na place QR kód — kartička, účtenka, samolepka u kasy</li>
+      <li>Naskenuje ho a potvrdí 18+</li>
+      <li>Přidá si to na plochu</li>
+      <li>Povolí upozornění na novinky</li>
     </ol>
-    <div class="callout"><strong>Když kód unikne,</strong> vygenerujete si v aplikaci nový a starý přestane platit. Vytisknete nový QR a jedete dál.</div>`
+    <div class="callout">Kdyby kód unikl, vygeneruješ si novej a starej přestane platit.</div>`
 },
 {
-  id:'features', cat:'funkce', g:'g1', kicker:'Rozsah',
-  title:'Co bude aplikace umět',
-  excerpt:'Zeď nabídky, kategorie, akce, oblíbené, vyhledávání a upozornění na novinky.',
+  id:'features', cat:'funkce', g:'g1', kicker:'Funkce',
+  title:'Co to bude umět',
+  excerpt:'Zeď, kategorie, akce, oblíbené a upozornění na novinky.',
   body:`
-    <h3>Pro zákazníky</h3>
+    <h3>Zákazník</h3>
     <ul>
-      <li>Zeď nabídky s fotkou, popisem a cenou</li>
-      <li>Připnuté příspěvky vždy nahoře</li>
-      <li>Kategorie podle vašeho sortimentu</li>
-      <li>Akce a slevy s platností do data</li>
-      <li>Vyhledávání v nabídce</li>
-      <li>Oblíbené položky</li>
-      <li>Upozornění na novinky a akce</li>
-      <li>Otevírací doba, mapa a tlačítko zavolat</li>
+      <li>Zeď s fotkou, popisem a cenou</li>
+      <li>Kategorie a hledání</li>
+      <li>Akce a slevy s platností</li>
+      <li>Oblíbené</li>
+      <li>Upozornění na novinky</li>
+      <li>Otvíračka, mapa, zavolat</li>
     </ul>
-    <h3>Pro vás — správa obsahu</h3>
+    <h3>Ty</h3>
     <ul>
-      <li>Přidání příspěvku přímo z mobilu: vyfotit, popsat, publikovat</li>
-      <li>Úprava i smazání kdykoli, změna je vidět ihned</li>
-      <li>Připnutí příspěvku na začátek zdi</li>
-      <li>Označení jako akce včetně konce platnosti</li>
-      <li><strong>Vlastní kategorie</strong> — přidáte, přejmenujete, přeskládáte, smažete</li>
-      <li>Odeslání upozornění zákazníkům jedním tlačítkem</li>
-      <li>Vygenerování nového přístupového kódu a QR</li>
-      <li>Export všech dat i seznamu odběratelů</li>
-    </ul>
-    <p>Ceny se u produktů zobrazují. Skladovou dostupnost nesledujeme, abyste neměl co udržovat navíc.</p>`
+      <li>Přidáš příspěvek z mobilu — vyfotíš, napíšeš, publikuješ</li>
+      <li>Upravíš i smažeš kdykoli</li>
+      <li>Připneš nahoru, označíš jako akci</li>
+      <li><strong>Kategorie si děláš sám</strong> — přidat, přejmenovat, přeskládat</li>
+      <li>Pošleš upozornění jedním tlačítkem</li>
+      <li>Vygeneruješ novej přístupovej kód</li>
+    </ul>`
 },
 {
-  id:'own', cat:'proc', g:'g6', kicker:'Vlastnictví',
-  title:'Komu to všechno patří',
-  excerpt:'Doména, server, data i seznam odběratelů na vaše IČO. Kdykoli si to můžete vzít a odejít.',
+  id:'price', cat:'cena', g:'g4', kicker:'Cena', sale:true,
+  title:'Co to stojí',
+  excerpt:'60 000 za vývoj, 2 500 měsíčně za provoz. Applu a Googlu nic.',
   body:`
-    <p>Tohle je jádro celé nabídky. Aplikace poběží na serveru a doméně vedených <strong>na vaše IČO</strong>, ne na moje.</p>
     <div class="rows">
-      <div class="row"><span>Doména</span><b>Vaše</b></div>
-      <div class="row"><span>Server</span><b>Váš</b></div>
-      <div class="row"><span>Databáze a fotografie</span><b>Vaše</b></div>
-      <div class="row"><span>Seznam odběratelů</span><b>Váš</b></div>
-      <div class="row"><span>Zdrojový kód po doplacení</span><b>Váš</b></div>
-    </div>
-    <p>Text upozornění je mezi vaším serverem a telefonem zákazníka <strong>šifrovaný</strong>. Google ani Apple nevidí, co v notifikaci stojí — jen ji doručí.</p>
-    <p>Kdybychom se někdy rozešli, nezůstane nic v mých rukou. Dostanete přístupy, kód i data a projekt může převzít kdokoli další. To je záměr, ne ústupek.</p>`
-},
-{
-  id:'price', cat:'cena', g:'g5', kicker:'Cena', sale:true,
-  title:'Kolik to stojí',
-  excerpt:'60 000 Kč za vývoj, 2 500 Kč měsíčně za provoz. Applu ani Googlu neplatíte nic.',
-  body:`
-    <p>Cena za vývoj je <strong>pevná</strong>. Pokrývá celý rozsah včetně dvou kol vašich připomínek a zaškolení.</p>
-    <div class="rows">
-      <div class="row big"><span>Vývoj aplikace</span><b>60 000 Kč</b></div>
+      <div class="row big"><span>Vývoj celkem</span><b>60 000 Kč</b></div>
       <div class="row"><span>Záloha při podpisu</span><b>24 000 Kč</b></div>
-      <div class="row"><span>Po odsouhlasení funkční verze</span><b>18 000 Kč</b></div>
-      <div class="row"><span>Doplatek při spuštění</span><b>18 000 Kč</b></div>
+      <div class="row"><span>Po funkční verzi</span><b>18 000 Kč</b></div>
+      <div class="row"><span>Při spuštění</span><b>18 000 Kč</b></div>
     </div>
-    <h3>Provoz a údržba — 2 500 Kč měsíčně</h3>
+    <h3>V provozu za 2 500 Kč / měs je</h3>
     <ul>
-      <li>Dohled nad serverem a bezpečnostní aktualizace</li>
-      <li>Denní zálohy dat s možností obnovy</li>
-      <li>Drobné úpravy do jedné hodiny měsíčně</li>
-      <li>Reakce na nahlášený problém do dvou pracovních dnů</li>
+      <li>Server, aktualizace, dohled</li>
+      <li>Denní zálohy</li>
+      <li>Drobný úpravy do hodiny měsíčně</li>
+      <li>Reakce do dvou pracovních dnů</li>
     </ul>
-    <p>Vypověditelné ke konci libovolného měsíce. Aplikace vám zůstává i potom.</p>
-    <h3>Co platíte přímo poskytovatelům</h3>
+    <h3>Platíš přímo poskytovatelům</h3>
     <div class="rows">
       <div class="row"><span>Server</span><b>~250 Kč / měs</b></div>
       <div class="row"><span>Doména</span><b>~300 Kč / rok</b></div>
-      <div class="row"><span>Apple App Store</span><b>0 Kč</b></div>
-      <div class="row"><span>Google Play</span><b>0 Kč</b></div>
+      <div class="row"><span>Apple + Google</span><b>0 Kč</b></div>
     </div>
-    <p>Nejsem plátce DPH, uvedené ceny jsou konečné.</p>`
+    <p>Nejsem plátce DPH, ceny jsou konečný.</p>`
 },
 {
-  id:'plan', cat:'postup', g:'g2', kicker:'Harmonogram',
-  title:'Osm týdnů od dodání podkladů',
-  excerpt:'Návrh, databáze, katalog, správa obsahu, spuštění. Čísla označují týdny.',
+  id:'deal', cat:'domluva', g:'g5', kicker:'Domluva',
+  title:'Ať jsme domluvení',
+  excerpt:'Co potřebuju od tebe, co v tom není a pár vět na rovinu.',
   body:`
-    <ol>
-      <li><strong>Týden 1–2 — Podklady a návrh vzhledu.</strong> Odsouhlasíme si, jak bude aplikace vypadat a jaké budou kategorie. Než začnu programovat, uvidíte návrhy obrazovek.</li>
-      <li><strong>Týden 2–3 — Server, databáze, přístup přes kód.</strong> Zprovoznění serveru, věková brána, přístupový kód a QR.</li>
-      <li><strong>Týden 3–5 — Katalog.</strong> Zeď nabídky, kategorie, akce, vyhledávání, oblíbené, kontakt a mapa.</li>
-      <li><strong>Týden 5–6 — Správa obsahu a upozornění.</strong> Vaše administrace. Tady dostanete přístup a začnete plnit obsah.</li>
-      <li><strong>Týden 7–8 — Vzhled, testování, spuštění.</strong> Test na iPhonu i Androidu, tisková předloha QR kódu, zaškolení, spuštění.</li>
-    </ol>
-    <div class="callout">Termín začíná běžet dnem, kdy od vás dostanu podklady — ne dnem podpisu.</div>`
-},
-{
-  id:'notincl', cat:'cena', g:'g3', kicker:'Hranice rozsahu',
-  title:'Co v ceně není',
-  excerpt:'Uvádím výslovně, aby nevznikla nedorozumění. Cokoli z toho lze doobjednat.',
-  body:`
+    <h3>Potřebuju od tebe</h3>
     <ul>
-      <li>Nákupní košík, objednávky a platby v aplikaci</li>
-      <li>Propojení s pokladnou, skladem nebo účetnictvím</li>
-      <li>Fotografování produktů a psaní popisků</li>
-      <li>Tvorba loga a grafiky prodejny</li>
-      <li>Tisk QR kódů, kartiček a materiálů do prodejny</li>
-      <li>Cizojazyčné verze</li>
-      <li>Verze pro App Store a Google Play</li>
-      <li>Právní posouzení textů a sortimentu</li>
+      <li>Logo a barvy</li>
+      <li>Kategorie — klidně jen 4 až 6 na začátek</li>
+      <li>10–15 produktů s fotkama, popisem a cenou</li>
+      <li>IČO, adresa, otvíračka</li>
+      <li>Doménu a server na tvoje IČO — pomůžu ti to zařídit</li>
     </ul>
-    <div class="callout"><strong>Doporučení k obsahu.</strong> Popisky produktů si nechte jednou projít advokátem. U vašeho sortimentu je rozdíl mezi popisem zboží a propagací užívání právně podstatný a je levnější ho ošetřit předem. Vzorové formulace vám do administrace připravím, ale nejsem právník a odpovědnost za obsah nesete jako provozovatel vy.</div>`
-},
-{
-  id:'need', cat:'postup', g:'g4', kicker:'Součinnost',
-  title:'Co potřebuji od vás',
-  excerpt:'Bez podkladů nemůžu začít a osmitýdenní termín nezačíná běžet.',
-  body:`
+    <p>Osm týdnů běží od chvíle, kdy tohle mám. Ne od podpisu.</p>
+
+    <h3>V ceně není</h3>
     <ul>
-      <li><strong>Logo a firemní barvy</strong> v dobrém rozlišení, nebo souhlas, že vzhled navrhnu já</li>
-      <li><strong>Seznam kategorií</strong>, do kterých chcete nabídku dělit — doporučuji začít se čtyřmi až šesti</li>
-      <li><strong>10–15 produktů</strong> s fotkami, popisem a cenou na naplnění aplikace při vývoji</li>
-      <li><strong>Fakturační a kontaktní údaje</strong> — IČO, adresa, telefon, otevírací doba</li>
-      <li><strong>Zásady ochrany osobních údajů</strong> a povinná právní upozornění</li>
-      <li><strong>Vybraná doména</strong> a registrace serveru na vaše IČO — se zařízením pomůžu</li>
+      <li>Košík, objednávky, platby</li>
+      <li>Propojení s pokladnou nebo skladem</li>
+      <li>Focení zboží a psaní popisků</li>
+      <li>Tisk QR kódů a kartiček</li>
+      <li>Verze do App Store a Google Play</li>
     </ul>
-    <div class="callout"><strong>Nejčastější zdržení bývá u fotografií.</strong> Jejich kvalita rozhoduje o dojmu z aplikace víc než cokoli, co naprogramuji. Domluvte si je včas.</div>`
-},
-{
-  id:'terms', cat:'cena', g:'g6', kicker:'Podmínky',
-  title:'Smluvní ujednání',
-  excerpt:'Dvě kola připomínek, 30 dní oprav zdarma, zdrojový kód je po doplacení váš.',
-  body:`
+
+    <h3>Na rovinu</h3>
     <ul>
-      <li>V ceně jsou <strong>dvě kola připomínek</strong> ke vzhledu a obsahu. Další úpravy 900 Kč/hod.</li>
-      <li>Změny nad rámec rozsahu se ocení a odsouhlasí předem, písemně.</li>
-      <li><strong>30 dní po spuštění opravuji chyby zdarma.</strong> Nová funkce není chyba.</li>
-      <li>Autorská práva ke zdrojovému kódu přecházejí na vás <strong>doplacením ceny</strong>.</li>
-      <li>Za obsah vkládaný do aplikace a jeho soulad s předpisy odpovídá provozovatel.</li>
-      <li>Termín dokončení běží od dodání kompletních podkladů.</li>
-    </ul>`
+      <li>Dvě kola připomínek v ceně, pak 900 Kč/hod</li>
+      <li>30 dní po spuštění opravuju chyby zdarma</li>
+      <li>Kód je tvůj, jakmile doplatíš</li>
+      <li>Dělám až po záloze — ať se nám to nerozmělní</li>
+    </ul>
+
+    <div class="callout"><strong>Jedna věc navíc:</strong> popisky zboží si nech jednou projít advokátem. Nejsem právník a za obsah appky ručíš ty.</div>`
 }
 ];
 
-/* ---------------- stav ---------------- */
+/* ---------- stav ---------- */
 const store = {
   get favs(){ try{ return JSON.parse(localStorage.getItem('favs')||'[]'); }catch(e){ return []; } },
   set favs(v){ try{ localStorage.setItem('favs', JSON.stringify(v)); }catch(e){} }
@@ -507,36 +347,31 @@ let active = 'vse';
 
 const feed = document.getElementById('feed');
 const chipbar = document.getElementById('chips');
-
 const ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 000-7.8z"/></svg>';
 
 function renderChips(){
   chipbar.innerHTML = '';
   CATS.forEach(c=>{
     const b = document.createElement('button');
-    b.className = 'chip';
-    b.type = 'button';
-    b.role = 'tab';
+    b.className='chip'; b.type='button'; b.role='tab';
     b.textContent = c.label;
     b.setAttribute('aria-selected', String(active === c.id));
-    b.addEventListener('click', ()=>{ active = c.id; renderChips(); renderFeed(); window.scrollTo({top:0, behavior:'smooth'}); });
+    b.addEventListener('click', ()=>{ active=c.id; renderChips(); renderFeed(); window.scrollTo({top:0,behavior:'smooth'}); });
     chipbar.appendChild(b);
   });
 }
 
 function renderFeed(){
   const favs = store.favs;
-  const list = POSTS.filter(p => active === 'vse' || p.cat === active)
-                    .sort((a,b)=> (b.pinned?1:0) - (a.pinned?1:0));
+  const list = POSTS.filter(p => active==='vse' || p.cat===active)
+                    .sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0));
   feed.innerHTML = '';
   list.forEach(p=>{
     const card = document.createElement('article');
     card.className = 'card';
-
     const badges = [];
     if(p.pinned) badges.push('<span class="badge">Připnuto</span>');
     if(p.sale)   badges.push('<span class="badge sale">Akce</span>');
-
     card.innerHTML = `
       <div class="thumb ${p.g}">
         <div class="badges">${badges.join('')}</div>
@@ -548,11 +383,9 @@ function renderFeed(){
         <p>${p.excerpt}</p>
         <span class="cmeta">Číst dál →</span>
       </div>`;
-
     card.querySelector('.fav').addEventListener('click', e=>{
       e.stopPropagation();
-      const f = store.favs;
-      const i = f.indexOf(p.id);
+      const f = store.favs, i = f.indexOf(p.id);
       if(i<0) f.push(p.id); else f.splice(i,1);
       store.favs = f;
       e.currentTarget.setAttribute('aria-pressed', String(i<0));
@@ -562,11 +395,9 @@ function renderFeed(){
   });
 }
 
-/* ---------------- detail ---------------- */
-const detail  = document.getElementById('detail');
-const dhero   = document.getElementById('dhero');
-const dkicker = document.getElementById('dkicker');
-const dcontent= document.getElementById('dcontent');
+/* ---------- detail ---------- */
+const detail=document.getElementById('detail'), dhero=document.getElementById('dhero'),
+      dkicker=document.getElementById('dkicker'), dcontent=document.getElementById('dcontent');
 
 function openDetail(p){
   dhero.className = 'dhero ' + p.g;
@@ -586,12 +417,11 @@ function closeDetail(){
 document.getElementById('back').addEventListener('click', ()=> history.back());
 window.addEventListener('popstate', closeDetail);
 
-/* ---------------- pridat na plochu ---------------- */
+/* ---------- pridat na plochu ---------- */
 const slot = document.getElementById('installSlot');
 const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 let deferred = null;
-
 const ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V3"/><path d="M8 7l4-4 4 4"/><path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg>';
 
 function showInstall(html, withButton){
@@ -601,31 +431,25 @@ function showInstall(html, withButton){
   const btn = document.getElementById('doInstall');
   if(btn) btn.addEventListener('click', async ()=>{
     if(!deferred) return;
-    deferred.prompt();
-    await deferred.userChoice;
-    deferred = null;
-    slot.innerHTML = '';
+    deferred.prompt(); await deferred.userChoice; deferred = null; slot.innerHTML='';
   });
 }
 
 window.addEventListener('beforeinstallprompt', e=>{
-  e.preventDefault();
-  deferred = e;
-  if(!standalone) showInstall('<span class="t">Přidejte si nabídku na plochu</span>Otevře se na celou obrazovku a bude fungovat i bez signálu.', true);
+  e.preventDefault(); deferred = e;
+  if(!standalone) showInstall('<span class="t">Přidej si to na plochu</span>Otevře se na celou obrazovku a pojede i bez signálu.', true);
 });
-
 if(!standalone && isIOS){
-  showInstall('<span class="t">Přidejte si nabídku na plochu</span>Klepněte dole na <strong>Sdílet</strong> a zvolte <strong>Přidat na plochu</strong>. Objeví se mezi vašimi aplikacemi.', false);
+  showInstall('<span class="t">Přidej si to na plochu</span>Klepni dole na <strong>Sdílet</strong> a dej <strong>Přidat na plochu</strong>.', false);
 }
 
-/* ---------------- start ---------------- */
+/* ---------- start ---------- */
 renderChips();
 renderFeed();
 
 if('serviceWorker' in navigator){
   const reg = ()=> navigator.serviceWorker.register('sw.js')
     .catch(e => console.warn('Service worker se nepodařilo zaregistrovat:', e.message));
-  // 'load' uz mohlo probehnout - pak by se posluchac nikdy nespustil
   if(document.readyState === 'complete') reg();
   else window.addEventListener('load', reg);
 }

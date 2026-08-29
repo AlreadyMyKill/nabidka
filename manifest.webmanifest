@@ -1,7 +1,7 @@
 {
-  "name": "Nabídka aplikace pro prodejnu",
-  "short_name": "Nabídka",
-  "description": "Privátní katalog nabídky v telefonu vašich zákazníků.",
+  "name": "WEED420SHOP — nabídka",
+  "short_name": "WEED420SHOP",
+  "description": "Vlastní katalog v telefonu tvých zákazníků.",
   "lang": "cs",
   "start_url": "./",
   "scope": "./",
