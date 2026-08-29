@@ -1,0 +1,12 @@
+Sem nakopiruj obrazky s presne temito nazvy:
+
+  logo.png        - logo WEED420SHOP (idealne PNG s pruhlednym pozadim)
+  produkt-1.jpg   - joint v MODRE tube  (T.H.C. Hybrid)
+  produkt-2.jpg   - joint v ZELENE tube (T.H.C. Sativa)
+  produkt-3.jpg   - joint v RUZOVE tube (T.H.C. Indica)
+
+Dokud tam nejsou, appka misto nich ukaze barevnou plochu
+s napisem "sem prijde fotka" - nic se nerozbije.
+
+Fotky orizni na pomer 4:3 na sirku, jinak je appka orizne sama
+(od stredu). Staci sirka kolem 1200 px.

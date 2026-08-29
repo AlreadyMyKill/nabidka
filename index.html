@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nabídka pro WEED420SHOP</title>
-<meta name="description" content="Vlastní katalog nabídky v telefonu tvých zákazníků.">
+<title>WEED420SHOP</title>
+<meta name="description" content="Nabídka prodejny přímo v telefonu.">
 
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#142E1C">
+<meta name="theme-color" content="#11120F">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,441 +16,503 @@
 <meta name="apple-mobile-web-app-title" content="WEED420SHOP">
 
 <style>
+/* Znacka prodejny je barevna a tmava - drzime jeden vzhled zamerne. */
 :root{
-  --bg:#F6F8F4; --card:#FFFFFF;
-  --ink:#131A13; --ink-2:#3A4437; --muted:#6C7869;
-  --line:#E0E6DB; --line-2:#CBD4C4;
-  --brand:#1E4A2C; --brand-ink:#2E6B3E; --brand-soft:#E7EFE5;
-  --sale:#A8342A;
-  --shadow:0 1px 2px rgba(19,26,19,.05), 0 6px 20px -10px rgba(19,26,19,.18);
-  --bar:rgba(246,248,244,.88);
+  --bg:#11120F;
+  --surface:#1B1D18;
+  --surface-2:#242720;
+  --ink:#ECEFE6;
+  --ink-2:#BFC6B6;
+  --muted:#88907E;
+  --line:#2C3028;
+  --red:#D3341F;
+  --yellow:#F2C110;
+  --green:#2EBE58;
+  --green-dim:#1E7C3A;
+  --bar:rgba(17,18,15,.9);
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0C100B; --card:#141A13;
-    --ink:#E9EEE6; --ink-2:#C3CCBE; --muted:#8B9787;
-    --line:#232B21; --line-2:#36402F;
-    --brand:#7FCB8D; --brand-ink:#7FCB8D; --brand-soft:#16220F;
-    --sale:#EC8878;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 6px 20px -10px rgba(0,0,0,.7);
-    --bar:rgba(12,16,11,.88);
-  }
-}
-
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{margin:0;padding:0;}
 body{
   background:var(--bg); color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-size:16px; line-height:1.55;
+  font-size:16px; line-height:1.5;
   -webkit-font-smoothing:antialiased; overscroll-behavior-y:none;
 }
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
-:focus-visible{outline:2px solid var(--brand-ink);outline-offset:2px;border-radius:6px;}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0;}
+button{cursor:pointer;padding:0;}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:8px;}
+img{max-width:100%;display:block;}
 
-/* ---------- hlavicka ---------- */
+/* ---------- horni lista ---------- */
 .topbar{
   position:sticky;top:0;z-index:40;
   background:var(--bar);
-  backdrop-filter:saturate(180%) blur(14px);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
   border-bottom:1px solid var(--line);
   padding-top:env(safe-area-inset-top);
 }
-.brandrow{display:flex;align-items:center;gap:.7rem;padding:.7rem 1rem .55rem;}
-.mark{width:2rem;height:2rem;border-radius:8px;background:var(--brand);display:grid;place-items:center;flex:none;}
-.mark svg{width:1.15rem;height:1.15rem;display:block;}
-.brandtext{display:flex;flex-direction:column;line-height:1.2;min-width:0;}
-.brandtext .n{font-weight:700;font-size:.95rem;letter-spacing:-.005em;}
-.brandtext .s{font-size:.73rem;color:var(--muted);}
-
-.chips{display:flex;gap:.4rem;overflow-x:auto;padding:0 1rem .65rem;scrollbar-width:none;-ms-overflow-style:none;}
-.chips::-webkit-scrollbar{display:none;}
-.chip{
-  flex:none;padding:.36rem .8rem;border-radius:999px;
-  border:1px solid var(--line-2);
-  font-size:.83rem;font-weight:550;color:var(--ink-2);white-space:nowrap;
+.brandrow{display:flex;align-items:center;gap:.7rem;padding:.6rem .9rem;}
+.logo{
+  width:2.4rem;height:2.4rem;border-radius:10px;flex:none;
+  background:#000;overflow:hidden;display:grid;place-items:center;
+  border:1px solid var(--line);
 }
-.chip[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#F2F8F1;}
-@media (prefers-color-scheme: dark){ .chip[aria-selected="true"]{color:#0C100B;} }
-
-/* ---------- vyzva k instalaci ---------- */
-.install{
-  margin:.85rem 1rem 0;background:var(--brand-soft);border:1px solid var(--line-2);
-  border-radius:12px;padding:.85rem .95rem;display:flex;gap:.75rem;align-items:flex-start;font-size:.88rem;
+.logo img{width:100%;height:100%;object-fit:contain;}
+.logo .lf{font-size:1.2rem;}
+.who{display:flex;flex-direction:column;min-width:0;line-height:1.25;flex:1;}
+.who .n{font-weight:800;font-size:1rem;letter-spacing:.02em;}
+.who .s{font-size:.74rem;color:var(--muted);}
+.who .s b{color:var(--green);font-weight:600;}
+.iconbtn{
+  width:2.3rem;height:2.3rem;border-radius:999px;flex:none;
+  display:grid;place-items:center;color:var(--ink-2);
 }
-.install svg{width:1.15rem;height:1.15rem;flex:none;margin-top:.1rem;color:var(--brand-ink);}
-.install .t{font-weight:700;display:block;margin-bottom:.15rem;}
-.install .x{margin-left:auto;color:var(--muted);font-size:1.35rem;line-height:1;flex:none;}
-.install button.act{margin-top:.5rem;background:var(--brand);color:#F2F8F1;padding:.45rem .85rem;border-radius:8px;font-size:.85rem;font-weight:600;}
-@media (prefers-color-scheme: dark){ .install button.act{color:#0C100B;} }
+.iconbtn:hover{background:var(--surface-2);}
+.iconbtn svg{width:1.3rem;height:1.3rem;}
 
-/* ---------- zed ---------- */
-.feed{padding:.85rem 1rem calc(2rem + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:.85rem;max-width:34rem;margin:0 auto;}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);width:100%;transition:transform .12s ease;}
-.card:active{transform:scale(.988);}
-.thumb{position:relative;aspect-ratio:16/9;display:flex;align-items:flex-end;padding:.75rem .85rem;}
-.thumb .kicker{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.35);}
-.badges{position:absolute;top:.7rem;left:.85rem;display:flex;gap:.35rem;}
-.badge{font-size:.66rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:.24rem .5rem;border-radius:6px;background:rgba(255,255,255,.94);color:var(--brand);}
-.badge.sale{background:var(--sale);color:#fff;}
-.fav{position:absolute;top:.55rem;right:.6rem;width:2.1rem;height:2.1rem;border-radius:999px;background:rgba(255,255,255,.9);display:grid;place-items:center;}
-.fav svg{width:1.15rem;height:1.15rem;color:#5D6A59;}
-.fav[aria-pressed="true"] svg{color:#C6392B;fill:#C6392B;}
-.cbody{padding:.8rem .95rem 1rem;display:flex;flex-direction:column;gap:.3rem;}
-.cbody h2{margin:0;font-size:1.05rem;font-weight:700;letter-spacing:-.012em;line-height:1.3;}
-.cbody p{margin:0;font-size:.9rem;color:var(--muted);}
-.cmeta{display:flex;gap:.45rem;margin-top:.35rem;font-size:.75rem;color:var(--brand-ink);font-weight:600;}
+/* rasta prouzek */
+.stripe{height:3px;display:flex;}
+.stripe i{flex:1;}
+.stripe i:nth-child(1){background:var(--red);}
+.stripe i:nth-child(2){background:var(--yellow);}
+.stripe i:nth-child(3){background:var(--green);}
 
-.g1{background:linear-gradient(135deg,#1E4A2C,#2E6B3E 55%,#48885A);}
-.g2{background:linear-gradient(135deg,#25443A,#356B57 55%,#4E9179);}
-.g3{background:linear-gradient(135deg,#1C3A44,#2B5C68 55%,#3E838F);}
-.g4{background:linear-gradient(135deg,#43301F,#6B4C2E 55%,#8E6A45);}
-.g5{background:linear-gradient(135deg,#2E2140,#4A3568 55%,#66508A);}
-
-/* ---------- detail ---------- */
-.detail{
-  position:fixed;inset:0;z-index:60;background:var(--bg);
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-  transform:translateX(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);visibility:hidden;
+/* hledani */
+.searchwrap{padding:0 .9rem .65rem;display:none;}
+.searchwrap.on{display:block;}
+.searchwrap input{
+  width:100%;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:999px;padding:.55rem .95rem;font-size:.92rem;color:var(--ink);
 }
-.detail.open{transform:translateX(0);visibility:visible;}
-.dbar{
-  position:sticky;top:0;z-index:2;background:var(--bar);
-  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
-  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top);display:flex;
-}
-.dbar button{display:flex;align-items:center;gap:.3rem;padding:.75rem 1rem;font-size:.95rem;color:var(--brand-ink);font-weight:600;}
-.dbar svg{width:1.1rem;height:1.1rem;}
-.dhero{aspect-ratio:16/9;display:flex;align-items:flex-end;padding:1rem;}
-.dhero .kicker{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 1px 3px rgba(0,0,0,.35);}
+.searchwrap input::placeholder{color:var(--muted);}
 
-.dcontent{
-  padding:1.25rem 1.15rem calc(3rem + env(safe-area-inset-bottom));
+/* pripnuty pruh */
+.pinbar{
+  display:flex;align-items:center;gap:.6rem;width:100%;
+  padding:.55rem .9rem;background:var(--surface);
+  border-bottom:1px solid var(--line);text-align:left;
+}
+.pinbar .edge{width:3px;align-self:stretch;background:var(--yellow);border-radius:2px;flex:none;}
+.pinbar .tx{min-width:0;flex:1;display:flex;flex-direction:column;line-height:1.3;}
+.pinbar .lbl{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);}
+.pinbar .txt{font-size:.86rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pinbar svg{width:1rem;height:1rem;color:var(--yellow);flex:none;}
+
+/* ---------- kanal ---------- */
+.feed{
   max-width:34rem;margin:0 auto;
-  display:flex;flex-direction:column;gap:1.05rem;
+  padding:.8rem .8rem calc(6rem + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;gap:.8rem;
 }
-.dcontent h1{margin:0;font-size:1.5rem;line-height:1.2;letter-spacing:-.02em;font-weight:700;text-wrap:balance;}
-.dcontent p{margin:0;font-size:.97rem;color:var(--ink-2);}
-.dcontent h3{margin:.5rem 0 0;font-size:.95rem;font-weight:700;}
-.dcontent ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.5rem;}
-.dcontent ul li{display:grid;grid-template-columns:1.05rem 1fr;gap:.5rem;font-size:.95rem;color:var(--ink-2);}
-.dcontent ul li::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:var(--brand-ink);margin-top:.52rem;margin-left:.3rem;}
-.dcontent ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.65rem;counter-reset:s;}
-.dcontent ol li{display:grid;grid-template-columns:1.5rem 1fr;gap:.55rem;font-size:.95rem;color:var(--ink-2);counter-increment:s;}
-.dcontent ol li::before{content:counter(s);font-size:.8rem;font-weight:700;color:var(--brand-ink);padding-top:.14rem;}
-.dcontent strong{color:var(--ink);font-weight:700;}
+.msg{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;position:relative;
+}
+.msg.pinned{border-color:var(--yellow);}
+.shot{position:relative;background:var(--surface-2);}
+.shot img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.ph{
+  aspect-ratio:4/3;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.4rem;color:#fff;
+}
+.ph .nm{font-weight:800;font-size:1rem;letter-spacing:.03em;text-shadow:0 1px 4px rgba(0,0,0,.4);}
+.ph .hint{font-size:.72rem;opacity:.85;}
+.ph.b{background:linear-gradient(150deg,#123B63,#2E7FC4);}
+.ph.g{background:linear-gradient(150deg,#125A2A,#3CBF63);}
+.ph.p{background:linear-gradient(150deg,#6B1F4A,#D2569B);}
+.ph.n{background:linear-gradient(150deg,#3A3320,#7A6A2E);}
 
-.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);}
-.row{display:flex;justify-content:space-between;gap:.9rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);font-size:.93rem;}
-.row:last-child{border-bottom:0;}
-.row span:first-child{color:var(--muted);}
-.row b{white-space:nowrap;font-variant-numeric:tabular-nums;}
-.row.big{background:var(--brand-soft);}
-.row.big b{font-size:1.15rem;}
+.tagline{position:absolute;top:.6rem;left:.6rem;display:flex;gap:.35rem;}
+.tag{
+  font-size:.64rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:.25rem .5rem;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;
+  backdrop-filter:blur(4px);
+}
+.tag.pin{background:var(--yellow);color:#1A1A12;}
+.tag.new{background:var(--red);}
 
-.callout{background:var(--brand-soft);border-left:3px solid var(--brand-ink);border-radius:0 10px 10px 0;padding:.8rem .95rem;font-size:.93rem;color:var(--ink-2);}
-.callout strong{color:var(--brand-ink);}
+.body{padding:.8rem .9rem .55rem;display:flex;flex-direction:column;gap:.35rem;}
+.body .ttl{font-weight:750;font-size:1rem;line-height:1.3;}
+.body .tx{font-size:.93rem;color:var(--ink-2);white-space:pre-wrap;}
+.price{color:var(--green);font-weight:750;font-size:.95rem;}
+.meta{
+  display:flex;align-items:center;gap:.45rem;
+  padding:.15rem .9rem .75rem;font-size:.74rem;color:var(--muted);
+}
+.meta svg{width:.9rem;height:.9rem;}
+.meta .dots{margin-left:auto;padding:.15rem .4rem;border-radius:6px;font-size:1rem;line-height:1;color:var(--muted);}
+.meta .dots:hover{background:var(--surface-2);}
 
-.fill{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;background:var(--brand-soft);color:var(--brand-ink);padding:.08em .4em;border-radius:4px;white-space:nowrap;}
+.empty{text-align:center;color:var(--muted);font-size:.9rem;padding:2.5rem 1rem;}
 
-footer.appfoot{border-top:1px solid var(--line);margin-top:.4rem;padding:1.4rem 1rem calc(2rem + env(safe-area-inset-bottom));text-align:center;font-size:.82rem;color:var(--muted);display:flex;flex-direction:column;gap:.3rem;}
-footer.appfoot b{color:var(--ink);font-size:.9rem;}
+/* ---------- tlacitko psani ---------- */
+.fab{
+  position:fixed;right:1rem;z-index:45;
+  bottom:calc(1.1rem + env(safe-area-inset-bottom));
+  width:3.5rem;height:3.5rem;border-radius:999px;
+  background:var(--green);color:#08210F;
+  display:grid;place-items:center;
+  box-shadow:0 6px 20px -4px rgba(46,190,88,.5);
+}
+.fab svg{width:1.6rem;height:1.6rem;}
 
+
+/* ---------- spodni panel ---------- */
+.scrim{
+  position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transition:opacity .2s;
+}
+.scrim.on{opacity:1;visibility:visible;}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:61;
+  background:var(--surface);
+  border-radius:18px 18px 0 0;
+  border-top:1px solid var(--line);
+  transform:translateY(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);
+  max-height:88vh;overflow-y:auto;
+  padding:.6rem 1rem calc(1.4rem + env(safe-area-inset-bottom));
+}
+.sheet.on{transform:translateY(0);}
+.grip{width:2.4rem;height:4px;border-radius:2px;background:var(--line);margin:.2rem auto .9rem;}
+.sheet h2{margin:0 0 .8rem;font-size:1.05rem;font-weight:750;}
+.sheet h3{margin:1.1rem 0 .5rem;font-size:.9rem;font-weight:750;color:var(--green);}
+.sheet p{margin:0 0 .6rem;font-size:.92rem;color:var(--ink-2);}
+.sheet ul{margin:0 0 .6rem;padding:0;list-style:none;display:flex;flex-direction:column;gap:.45rem;}
+.sheet ul li{display:grid;grid-template-columns:1rem 1fr;gap:.5rem;font-size:.92rem;color:var(--ink-2);}
+.sheet ul li::before{content:"";width:.35rem;height:.35rem;border-radius:50%;background:var(--green);margin-top:.5rem;margin-left:.3rem;}
+
+.act{
+  display:flex;align-items:center;gap:.75rem;width:100%;
+  padding:.85rem .3rem;font-size:.98rem;text-align:left;
+  border-bottom:1px solid var(--line);
+}
+.act:last-child{border-bottom:0;}
+.act svg{width:1.2rem;height:1.2rem;color:var(--muted);flex:none;}
+.act.danger{color:var(--red);}
+.act.danger svg{color:var(--red);}
+
+.field{
+  width:100%;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:12px;padding:.75rem .85rem;font-size:.95rem;color:var(--ink);
+  resize:vertical;min-height:6.5rem;line-height:1.5;
+}
+.field::placeholder{color:var(--muted);}
+.pickrow{
+  display:flex;align-items:center;gap:.6rem;margin:.7rem 0;
+  padding:.7rem .85rem;border:1px dashed var(--line);border-radius:12px;
+  color:var(--muted);font-size:.88rem;
+}
+.pickrow svg{width:1.2rem;height:1.2rem;flex:none;}
+.rowbtns{display:flex;gap:.6rem;margin-top:.9rem;}
+.btn{
+  flex:1;padding:.8rem;border-radius:12px;font-weight:700;font-size:.95rem;text-align:center;
+  background:var(--surface-2);color:var(--ink);border:1px solid var(--line);
+}
+.btn.primary{background:var(--green);color:#08210F;border-color:var(--green);}
+.toggle{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:var(--ink-2);margin-top:.2rem;}
+.toggle input{width:1.1rem;height:1.1rem;accent-color:var(--green);}
+
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:.6rem;}
+.r{display:flex;justify-content:space-between;gap:.8rem;padding:.65rem .85rem;border-bottom:1px solid var(--line);font-size:.92rem;}
+.r:last-child{border-bottom:0;}
+.r span{color:var(--muted);}
+.r b{white-space:nowrap;font-variant-numeric:tabular-nums;}
+.r.hi{background:var(--surface-2);}
+.r.hi b{color:var(--green);font-size:1.05rem;}
+
+.fill{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;
+  background:var(--surface-2);color:var(--yellow);padding:.08em .4em;border-radius:4px;
+}
 @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 </style>
 </head>
 <body>
 
-<div class="topbar">
+<header class="topbar">
   <div class="brandrow">
-    <div class="mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#EAF4E8" stroke-width="2" stroke-linecap="round">
-        <path d="M12 21V10"/>
-        <path d="M12 13c-1-3-4-4.5-7-4 .5 3 3 5 7 4z" fill="#EAF4E8" stroke="none"/>
-        <path d="M12 11c1-3.2 4-5 7.5-4.5C19 10 16 12 12 11z" fill="#EAF4E8" stroke="none"/>
-      </svg>
+    <div class="logo">
+      <img src="img/logo.png" alt="WEED420SHOP" onerror="this.remove();document.getElementById('lf').hidden=false">
+      <span class="lf" id="lf" hidden>🌿</span>
     </div>
-    <div class="brandtext">
+    <div class="who">
       <span class="n">WEED420SHOP</span>
-      <span class="s">nabídka na appku</span>
+      <span class="s"><b id="cnt">0</b> <span id="cntw">zpráv</span> &middot; píše jen správce</span>
     </div>
-  </div>
-  <div class="chips" role="tablist" id="chips"></div>
-</div>
-
-<div id="installSlot"></div>
-<main class="feed" id="feed"></main>
-
-<footer class="appfoot">
-  <b>Jan Fiedler</b>
-  <span><span class="fill">+420 604 132 567</span></span>
-</footer>
-
-<section class="detail" id="detail" aria-hidden="true">
-  <div class="dbar">
-    <button type="button" id="back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      Zpět
+    <button class="iconbtn" id="btnSearch" type="button" aria-label="Hledat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    </button>
+    <button class="iconbtn" id="btnInfo" type="button" aria-label="Více">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
     </button>
   </div>
-  <div class="dhero" id="dhero"><span class="kicker" id="dkicker"></span></div>
-  <div class="dcontent" id="dcontent"></div>
-</section>
+  <div class="searchwrap" id="searchwrap">
+    <input type="search" id="q" placeholder="Hledat ve zprávách…" autocomplete="off">
+  </div>
+  <div class="stripe"><i></i><i></i><i></i></div>
+</header>
+
+<button class="pinbar" id="pinbar" type="button" hidden>
+  <span class="edge"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 17v5"/><path d="M9 3h6l-1 6 3 3v2H7v-2l3-3z"/></svg>
+  <span class="tx"><span class="lbl">Připnuto</span><span class="txt" id="pintxt"></span></span>
+</button>
+
+<main class="feed" id="feed"></main>
+
+<button class="fab" id="fab" type="button" aria-label="Napsat zprávu">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+</button>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet"><div class="grip"></div><div id="sheetBody"></div></div>
 
 <script>
-const CATS = [
-  {id:'vse',     label:'Vše'},
-  {id:'cotoje',  label:'Co to je'},
-  {id:'funkce',  label:'Co to umí'},
-  {id:'cena',    label:'Cena'},
-  {id:'domluva', label:'Domluva'}
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const SEED = [
+  { id:'m5', pinned:true, ph:'n', img:null,
+    title:'Otevírací doba',
+    text:'Po–Pá  10:00–19:00\nSo  10:00–16:00\nNe  zavřeno\n\nNajdeš nás na [ADRESA].',
+    price:'', time:'po 9:12', views:412 },
+
+  { id:'m4', ph:'p', img:'img/produkt-3.jpg', badge:'new',
+    title:'T.H.C. Indica Joint',
+    text:'Předbalený cone v růžové tubě. True Hemp papírky, 100% konopí.',
+    price:'[CENA] Kč / ks', time:'út 16:40', views:288 },
+
+  { id:'m3', ph:'g', img:'img/produkt-2.jpg',
+    title:'T.H.C. Sativa Joint',
+    text:'Předbalený cone v zelené tubě. True Hemp papírky, 100% konopí.',
+    price:'[CENA] Kč / ks', time:'út 16:38', views:301 },
+
+  { id:'m2', ph:'b', img:'img/produkt-1.jpg',
+    title:'T.H.C. Hybrid Joint',
+    text:'Předbalený cone v modré tubě. True Hemp papírky, 100% konopí.',
+    price:'[CENA] Kč / ks', time:'út 16:35', views:295 },
+
+  { id:'m1', ph:null, img:null,
+    title:'',
+    text:'Vítej v našem kanálu. Novinky a nabídku dáváme sem — nikam jinam. Zapni si upozornění, ať ti nic neuteče.',
+    price:'', time:'pá 11:05', views:530 }
 ];
 
-const POSTS = [
-{
-  id:'pitch', cat:'cotoje', g:'g1', kicker:'Shrnutí', pinned:true,
-  title:'Co ti postavím',
-  excerpt:'Vlastní katalog v telefonu tvých zákazníků. Nikdo ti ho nevypne.',
-  body:`
-    <p>Appka, kterou si zákazník přidá na plochu telefonu. Dovnitř se dostane jen přes QR kód, co mu dáš na place.</p>
-    <p>Poběží na <strong>tvojí doméně a tvým serveru</strong>. Neschvaluje to žádný app store — takže to ani žádný app store nemůže zrušit.</p>
-    <div class="rows">
-      <div class="row big"><span>Vývoj</span><b>60 000 Kč</b></div>
-      <div class="row"><span>Provoz</span><b>2 500 Kč / měs</b></div>
-      <div class="row"><span>Hotovo za</span><b>8 týdnů</b></div>
-    </div>`
-},
-{
-  id:'meta', cat:'cotoje', g:'g2', kicker:'Ukázka',
-  title:'Tohle je ta appka',
-  excerpt:'Nečteš dokument o aplikaci. Čteš tu aplikaci.',
-  body:`
-    <p>Všechno, cos právě udělal, budou dělat i tvoji zákazníci:</p>
-    <ul>
-      <li>Zeď příspěvků, nejnovější nahoře</li>
-      <li>Připnutý příspěvek zůstává první</li>
-      <li>Kategorie v liště nahoře</li>
-      <li>Detail po klepnutí</li>
-      <li>Srdíčko = oblíbené</li>
-      <li>Ikona na ploše, bez prohlížeče</li>
-    </ul>
-    <div class="callout"><strong>Zkus si režim letadla</strong> a projdi to znovu. Jede to dál.</div>
-    <p>Místo těch barevných ploch tam budou fotky tvýho zboží.</p>`
-},
-{
-  id:'flow', cat:'funkce', g:'g3', kicker:'Jak se tam lidi dostanou',
-  title:'QR kód z obchodu',
-  excerpt:'Naskenuje, potvrdí 18+, hotovo. Žádná registrace.',
-  body:`
-    <p>Appka je neveřejná. Nikdo ji nenajde a bez kódu se dovnitř nedostane.</p>
-    <ol>
-      <li>Dáš mu na place QR kód — kartička, účtenka, samolepka u kasy</li>
-      <li>Naskenuje ho a potvrdí 18+</li>
-      <li>Přidá si to na plochu</li>
-      <li>Povolí upozornění na novinky</li>
-    </ol>
-    <div class="callout">Kdyby kód unikl, vygeneruješ si novej a starej přestane platit.</div>`
-},
-{
-  id:'features', cat:'funkce', g:'g1', kicker:'Funkce',
-  title:'Co to bude umět',
-  excerpt:'Zeď, kategorie, akce, oblíbené a upozornění na novinky.',
-  body:`
-    <h3>Zákazník</h3>
-    <ul>
-      <li>Zeď s fotkou, popisem a cenou</li>
-      <li>Kategorie a hledání</li>
-      <li>Akce a slevy s platností</li>
-      <li>Oblíbené</li>
-      <li>Upozornění na novinky</li>
-      <li>Otvíračka, mapa, zavolat</li>
-    </ul>
-    <h3>Ty</h3>
-    <ul>
-      <li>Přidáš příspěvek z mobilu — vyfotíš, napíšeš, publikuješ</li>
-      <li>Upravíš i smažeš kdykoli</li>
-      <li>Připneš nahoru, označíš jako akci</li>
-      <li><strong>Kategorie si děláš sám</strong> — přidat, přejmenovat, přeskládat</li>
-      <li>Pošleš upozornění jedním tlačítkem</li>
-      <li>Vygeneruješ novej přístupovej kód</li>
-    </ul>`
-},
-{
-  id:'price', cat:'cena', g:'g4', kicker:'Cena', sale:true,
-  title:'Co to stojí',
-  excerpt:'60 000 za vývoj, 2 500 měsíčně za provoz. Applu a Googlu nic.',
-  body:`
-    <div class="rows">
-      <div class="row big"><span>Vývoj celkem</span><b>60 000 Kč</b></div>
-      <div class="row"><span>Záloha při podpisu</span><b>24 000 Kč</b></div>
-      <div class="row"><span>Po funkční verzi</span><b>18 000 Kč</b></div>
-      <div class="row"><span>Při spuštění</span><b>18 000 Kč</b></div>
-    </div>
-    <h3>V provozu za 2 500 Kč / měs je</h3>
-    <ul>
-      <li>Server, aktualizace, dohled</li>
-      <li>Denní zálohy</li>
-      <li>Drobný úpravy do hodiny měsíčně</li>
-      <li>Reakce do dvou pracovních dnů</li>
-    </ul>
-    <h3>Platíš přímo poskytovatelům</h3>
-    <div class="rows">
-      <div class="row"><span>Server</span><b>~250 Kč / měs</b></div>
-      <div class="row"><span>Doména</span><b>~300 Kč / rok</b></div>
-      <div class="row"><span>Apple + Google</span><b>0 Kč</b></div>
-    </div>
-    <p>Nejsem plátce DPH, ceny jsou konečný.</p>`
-},
-{
-  id:'deal', cat:'domluva', g:'g5', kicker:'Domluva',
-  title:'Ať jsme domluvení',
-  excerpt:'Co potřebuju od tebe, co v tom není a pár vět na rovinu.',
-  body:`
-    <h3>Potřebuju od tebe</h3>
-    <ul>
-      <li>Logo a barvy</li>
-      <li>Kategorie — klidně jen 4 až 6 na začátek</li>
-      <li>10–15 produktů s fotkama, popisem a cenou</li>
-      <li>IČO, adresa, otvíračka</li>
-      <li>Doménu a server na tvoje IČO — pomůžu ti to zařídit</li>
-    </ul>
-    <p>tři týdny běží od chvíle, kdy tohle mám. Ne od podpisu.</p>
+const KEY = 'w420-kanal-v1';
+let msgs;
+try { msgs = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ msgs = null; }
+if (!Array.isArray(msgs) || !msgs.length) msgs = SEED.map(m => ({...m}));
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(msgs)); } catch(e){} };
 
-    <h3>V ceně není</h3>
-    <ul>
-      <li>Košík, objednávky, platby</li>
-      <li>Propojení s pokladnou nebo skladem</li>
-      <li>Focení zboží a psaní popisků</li>
-      <li>Tisk QR kódů a kartiček</li>
-      <li>Verze do App Store a Google Play</li>
-    </ul>
+let filter = '';
 
-    <h3>Na rovinu</h3>
-    <ul>
-      <li>Dvě kola připomínek v ceně, pak 900 Kč/hod</li>
-      <li>30 dní po spuštění opravuju chyby zdarma</li>
-      <li>Kód je tvůj, jakmile doplatíš</li>
-      <li>Dělám až po záloze — ať se nám to nerozmělní</li>
-    </ul>
+const ICON_EYE  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 
-    <div class="callout"><strong>Jedna věc navíc:</strong> popisky zboží si nech jednou projít advokátem. Nejsem právník a za obsah appky ručíš ty.</div>`
-}
-];
+function plural(n){ return n===1 ? 'zpráva' : (n>=2&&n<=4 ? 'zprávy' : 'zpráv'); }
 
-/* ---------- stav ---------- */
-const store = {
-  get favs(){ try{ return JSON.parse(localStorage.getItem('favs')||'[]'); }catch(e){ return []; } },
-  set favs(v){ try{ localStorage.setItem('favs', JSON.stringify(v)); }catch(e){} }
-};
-let active = 'vse';
+function render(){
+  const feed = $('#feed');
+  const q = filter.trim().toLowerCase();
+  const list = msgs.filter(m => !q || (m.title+' '+m.text).toLowerCase().includes(q));
 
-const feed = document.getElementById('feed');
-const chipbar = document.getElementById('chips');
-const ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 000-7.8z"/></svg>';
+  $('#cnt').textContent = msgs.length;
+  $('#cntw').textContent = plural(msgs.length);
 
-function renderChips(){
-  chipbar.innerHTML = '';
-  CATS.forEach(c=>{
-    const b = document.createElement('button');
-    b.className='chip'; b.type='button'; b.role='tab';
-    b.textContent = c.label;
-    b.setAttribute('aria-selected', String(active === c.id));
-    b.addEventListener('click', ()=>{ active=c.id; renderChips(); renderFeed(); window.scrollTo({top:0,behavior:'smooth'}); });
-    chipbar.appendChild(b);
-  });
-}
+  const pin = msgs.find(m => m.pinned);
+  const pb = $('#pinbar');
+  if (pin && !q){
+    pb.hidden = false;
+    $('#pintxt').textContent = pin.title || pin.text.split('\n')[0];
+  } else pb.hidden = true;
 
-function renderFeed(){
-  const favs = store.favs;
-  const list = POSTS.filter(p => active==='vse' || p.cat===active)
-                    .sort((a,b)=> (b.pinned?1:0)-(a.pinned?1:0));
-  feed.innerHTML = '';
-  list.forEach(p=>{
-    const card = document.createElement('article');
-    card.className = 'card';
-    const badges = [];
-    if(p.pinned) badges.push('<span class="badge">Připnuto</span>');
-    if(p.sale)   badges.push('<span class="badge sale">Akce</span>');
-    card.innerHTML = `
-      <div class="thumb ${p.g}">
-        <div class="badges">${badges.join('')}</div>
-        <button class="fav" type="button" aria-pressed="${favs.includes(p.id)}" aria-label="Přidat do oblíbených">${ICON_HEART}</button>
-        <span class="kicker">${p.kicker}</span>
-      </div>
-      <div class="cbody">
-        <h2>${p.title}</h2>
-        <p>${p.excerpt}</p>
-        <span class="cmeta">Číst dál →</span>
+  if (!list.length){
+    feed.innerHTML = '<p class="empty">Nic nenalezeno.</p>';
+    return;
+  }
+
+  const ordered = [...list].sort((a,b) => (b.pinned?1:0) - (a.pinned?1:0));
+  feed.innerHTML = ordered.map(m => {
+    const tags = [];
+    if (m.pinned) tags.push('<span class="tag pin">Připnuto</span>');
+    if (m.badge === 'new') tags.push('<span class="tag new">Novinka</span>');
+
+    let shot = '';
+    if (m.img || m.ph){
+      const fallback = m.ph
+        ? `<div class="ph ${m.ph}"><span class="nm">${esc(m.title||'WEED420SHOP')}</span><span class="hint">sem přijde fotka</span></div>`
+        : '';
+      shot = `<div class="shot">
+        ${m.img ? `<img src="${esc(m.img)}" alt="${esc(m.title)}" onerror="this.outerHTML=${JSON.stringify(fallback).replace(/"/g,'&quot;')}">` : fallback}
+        ${tags.length ? `<div class="tagline">${tags.join('')}</div>` : ''}
       </div>`;
-    card.querySelector('.fav').addEventListener('click', e=>{
-      e.stopPropagation();
-      const f = store.favs, i = f.indexOf(p.id);
-      if(i<0) f.push(p.id); else f.splice(i,1);
-      store.favs = f;
-      e.currentTarget.setAttribute('aria-pressed', String(i<0));
+    } else if (tags.length){
+      shot = `<div style="padding:.7rem .9rem 0"><div class="tagline" style="position:static">${tags.join('')}</div></div>`;
+    }
+
+    return `<article class="msg ${m.pinned?'pinned':''}" data-id="${m.id}">
+      ${shot}
+      <div class="body">
+        ${m.title ? `<span class="ttl">${esc(m.title)}</span>` : ''}
+        <span class="tx">${esc(m.text)}</span>
+        ${m.price ? `<span class="price">${esc(m.price)}</span>` : ''}
+      </div>
+      <div class="meta">
+        <span>${esc(m.time)}</span>
+        ${ICON_EYE}<span>${m.views}</span>
+        <button class="dots" type="button" data-menu="${m.id}" aria-label="Možnosti zprávy">&#183;&#183;&#183;</button>
+      </div>
+    </article>`;
+  }).join('');
+
+  feed.querySelectorAll('[data-menu]').forEach(b =>
+    b.addEventListener('click', () => menu(b.dataset.menu)));
+}
+
+/* ---------- spodni panel ---------- */
+const scrim = $('#scrim'), sheet = $('#sheet'), sheetBody = $('#sheetBody');
+function open(html){ sheetBody.innerHTML = html; scrim.classList.add('on'); sheet.classList.add('on'); }
+function close(){ scrim.classList.remove('on'); sheet.classList.remove('on'); }
+scrim.addEventListener('click', close);
+
+/* ---------- akce nad zpravou ---------- */
+function menu(id){
+  const m = msgs.find(x => x.id === id);
+  if (!m) return;
+  open(`
+    <h2>${esc(m.title || 'Zpráva')}</h2>
+    <button class="act" id="aEdit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L20 8l-4-4L4 16v4z"/></svg> Upravit</button>
+    <button class="act" id="aPin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 17v5"/><path d="M9 3h6l-1 6 3 3v2H7v-2l3-3z"/></svg> ${m.pinned ? 'Odepnout' : 'Připnout nahoru'}</button>
+    <button class="act danger" id="aDel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg> Smazat</button>
+  `);
+  $('#aEdit').addEventListener('click', () => edit(id));
+  $('#aPin').addEventListener('click', () => {
+    const was = m.pinned;
+    msgs.forEach(x => x.pinned = false);
+    m.pinned = !was;
+    save(); render(); close();
+  });
+  $('#aDel').addEventListener('click', () => {
+    open(`<h2>Smazat zprávu?</h2><p>Zmizí všem zákazníkům. Tohle nejde vrátit.</p>
+      <div class="rowbtns"><button class="btn" id="no">Zpět</button><button class="btn" id="yes" style="background:var(--red);border-color:var(--red);color:#fff">Smazat</button></div>`);
+    $('#no').addEventListener('click', close);
+    $('#yes').addEventListener('click', () => {
+      msgs = msgs.filter(x => x.id !== id); save(); render(); close();
     });
-    card.addEventListener('click', ()=> openDetail(p));
-    feed.appendChild(card);
   });
 }
 
-/* ---------- detail ---------- */
-const detail=document.getElementById('detail'), dhero=document.getElementById('dhero'),
-      dkicker=document.getElementById('dkicker'), dcontent=document.getElementById('dcontent');
-
-function openDetail(p){
-  dhero.className = 'dhero ' + p.g;
-  dkicker.textContent = p.kicker;
-  dcontent.innerHTML = `<h1>${p.title}</h1>` + p.body;
-  detail.classList.add('open');
-  detail.setAttribute('aria-hidden','false');
-  detail.scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-  history.pushState({detail:true}, '');
-}
-function closeDetail(){
-  detail.classList.remove('open');
-  detail.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-document.getElementById('back').addEventListener('click', ()=> history.back());
-window.addEventListener('popstate', closeDetail);
-
-/* ---------- pridat na plochu ---------- */
-const slot = document.getElementById('installSlot');
-const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-let deferred = null;
-const ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V3"/><path d="M8 7l4-4 4 4"/><path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg>';
-
-function showInstall(html, withButton){
-  if(sessionStorage.getItem('installDismissed')) return;
-  slot.innerHTML = `<div class="install">${ICON_SHARE}<div>${html}${withButton?'<button class="act" type="button" id="doInstall">Přidat na plochu</button>':''}</div><button class="x" type="button" aria-label="Zavřít">&times;</button></div>`;
-  slot.querySelector('.x').addEventListener('click', ()=>{ slot.innerHTML=''; try{sessionStorage.setItem('installDismissed','1');}catch(e){} });
-  const btn = document.getElementById('doInstall');
-  if(btn) btn.addEventListener('click', async ()=>{
-    if(!deferred) return;
-    deferred.prompt(); await deferred.userChoice; deferred = null; slot.innerHTML='';
+function edit(id){
+  const m = msgs.find(x => x.id === id);
+  open(`
+    <h2>Upravit zprávu</h2>
+    <input class="field" id="eT" style="min-height:0" placeholder="Nadpis (nepovinný)" value="${esc(m.title)}">
+    <div style="height:.6rem"></div>
+    <textarea class="field" id="eX" placeholder="Text zprávy">${esc(m.text)}</textarea>
+    <div style="height:.6rem"></div>
+    <input class="field" id="eP" style="min-height:0" placeholder="Cena (nepovinná)" value="${esc(m.price)}">
+    <div class="rowbtns"><button class="btn" id="c">Zrušit</button><button class="btn primary" id="s">Uložit</button></div>
+  `);
+  $('#c').addEventListener('click', close);
+  $('#s').addEventListener('click', () => {
+    m.title = $('#eT').value.trim();
+    m.text  = $('#eX').value.trim();
+    m.price = $('#eP').value.trim();
+    save(); render(); close();
   });
 }
 
-window.addEventListener('beforeinstallprompt', e=>{
-  e.preventDefault(); deferred = e;
-  if(!standalone) showInstall('<span class="t">Přidej si to na plochu</span>Otevře se na celou obrazovku a pojede i bez signálu.', true);
+/* ---------- nova zprava ---------- */
+$('#fab').addEventListener('click', () => {
+  open(`
+    <h2>Nová zpráva</h2>
+    <div class="pickrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 16l-5-5-6 6"/></svg> Přidat fotku z telefonu</div>
+    <input class="field" id="nT" style="min-height:0" placeholder="Nadpis (nepovinný)">
+    <div style="height:.6rem"></div>
+    <textarea class="field" id="nX" placeholder="Co je nového?"></textarea>
+    <div style="height:.6rem"></div>
+    <input class="field" id="nP" style="min-height:0" placeholder="Cena (nepovinná)">
+    <label class="toggle" style="margin-top:.8rem"><input type="checkbox" id="nPin"> Připnout nahoru</label>
+    <div class="rowbtns"><button class="btn" id="c">Zrušit</button><button class="btn primary" id="s">Odeslat</button></div>
+  `);
+  $('#c').addEventListener('click', close);
+  $('#s').addEventListener('click', () => {
+    const text = $('#nX').value.trim();
+    const title = $('#nT').value.trim();
+    if (!text && !title) { close(); return; }
+    if ($('#nPin').checked) msgs.forEach(x => x.pinned = false);
+    msgs.unshift({
+      id: 'n' + msgs.length + '-' + text.length,
+      pinned: $('#nPin').checked,
+      ph: null, img: null,
+      title, text, price: $('#nP').value.trim(),
+      time: 'teď', views: 1
+    });
+    save(); render(); close();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
 });
-if(!standalone && isIOS){
-  showInstall('<span class="t">Přidej si to na plochu</span>Klepni dole na <strong>Sdílet</strong> a dej <strong>Přidat na plochu</strong>.', false);
-}
+
+/* ---------- hledani ---------- */
+$('#btnSearch').addEventListener('click', () => {
+  const w = $('#searchwrap');
+  w.classList.toggle('on');
+  if (w.classList.contains('on')) $('#q').focus();
+  else { $('#q').value = ''; filter = ''; render(); }
+});
+$('#q').addEventListener('input', e => { filter = e.target.value; render(); });
+
+$('#pinbar').addEventListener('click', () => {
+  const pin = msgs.find(m => m.pinned);
+  if (pin) document.querySelector(`[data-id="${pin.id}"]`)?.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+/* ---------- info / nabidka ---------- */
+$('#btnInfo').addEventListener('click', () => {
+  open(`
+    <h2>O téhle ukázce</h2>
+    <p>Tohle je funkční prototyp kanálu pro WEED420SHOP. Chová se jako Telegram: zprávy odshora dolů, píše jen správce.</p>
+    <p><strong>Vyzkoušej si to:</strong> klepni na zelené tlačítko vpravo dole a napiš zprávu. U každé zprávy je <strong>&#183;&#183;&#183;</strong> — upravit, připnout, smazat. Změny zůstanou v telefonu.</p>
+
+    <h3>Co je v rozsahu</h3>
+    <ul>
+      <li>Zeď zpráv, fotka + text</li>
+      <li>Upravit a smazat zprávu</li>
+      <li>Připnutá zpráva nahoře</li>
+      <li>Hledání ve zprávách</li>
+      <li>Upozornění na novou zprávu</li>
+      <li>Vstup přes QR kód z prodejny, věková brána 18+</li>
+    </ul>
+
+    <h3>Cena</h3>
+    <div class="rows">
+      <div class="r hi"><span>Vývoj celkem</span><b>45 000 Kč</b></div>
+      <div class="r"><span>Záloha při podpisu</span><b>18 000 Kč</b></div>
+      <div class="r"><span>Po funkční verzi</span><b>13 500 Kč</b></div>
+      <div class="r"><span>Při spuštění</span><b>13 500 Kč</b></div>
+      <div class="r"><span>Provoz a údržba</span><b>2 500 Kč / měs</b></div>
+      <div class="r"><span>Hotovo za</span><b>6 týdnů</b></div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted)">Server ~250 Kč/měs a doména ~300 Kč/rok platíš přímo poskytovatelům, na svoje IČO. Applu ani Googlu nic.</p>
+
+    <button class="act danger" id="reset" style="margin-top:.8rem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      Obnovit ukázku do původního stavu
+    </button>
+  `);
+  $('#reset').addEventListener('click', () => {
+    msgs = SEED.map(m => ({...m})); save(); render(); close();
+  });
+});
 
 /* ---------- start ---------- */
-renderChips();
-renderFeed();
+render();
 
-if('serviceWorker' in navigator){
-  const reg = ()=> navigator.serviceWorker.register('sw.js')
+if ('serviceWorker' in navigator){
+  const reg = () => navigator.serviceWorker.register('sw.js')
     .catch(e => console.warn('Service worker se nepodařilo zaregistrovat:', e.message));
-  if(document.readyState === 'complete') reg();
+  if (document.readyState === 'complete') reg();
   else window.addEventListener('load', reg);
 }
 </script>

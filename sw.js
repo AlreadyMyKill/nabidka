@@ -1,4 +1,4 @@
-const CACHE = 'nabidka-v1';
+const CACHE = 'w420-v2';
 
 const ASSETS = [
   './',
@@ -6,13 +6,17 @@ const ASSETS = [
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './icons/icon-180.png'
+  './icons/icon-180.png',
+  './img/logo.png',
+  './img/produkt-1.jpg',
+  './img/produkt-2.jpg',
+  './img/produkt-3.jpg'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
-      .then(c => c.addAll(ASSETS))
+      .then(c => Promise.allSettled(ASSETS.map(a => c.add(a))))
       .then(() => self.skipWaiting())
   );
 });

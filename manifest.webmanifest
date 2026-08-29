@@ -1,14 +1,14 @@
 {
-  "name": "WEED420SHOP — nabídka",
+  "name": "WEED420SHOP",
   "short_name": "WEED420SHOP",
-  "description": "Vlastní katalog v telefonu tvých zákazníků.",
+  "description": "Nabídka prodejny přímo v telefonu.",
   "lang": "cs",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0C100B",
-  "theme_color": "#142E1C",
+  "background_color": "#11120F",
+  "theme_color": "#11120F",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
