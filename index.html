@@ -623,7 +623,11 @@ renderChips();
 renderFeed();
 
 if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  const reg = ()=> navigator.serviceWorker.register('sw.js')
+    .catch(e => console.warn('Service worker se nepodařilo zaregistrovat:', e.message));
+  // 'load' uz mohlo probehnout - pak by se posluchac nikdy nespustil
+  if(document.readyState === 'complete') reg();
+  else window.addEventListener('load', reg);
 }
 </script>
 </body>
