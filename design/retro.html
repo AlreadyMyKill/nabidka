@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Street v retro Americe — WEED420SHOP</title>
+<link rel="icon" href="../icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Fugaz+One&display=swap">
+<style>
+:root{
+  --pg:#0E0F0C; --pg2:#171A15; --pgline:#2A2F26;
+  --pgink:#ECEFE6; --pgink2:#AEB6A5; --pgmut:#7C856F; --acc:#2EBE58;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--pg);color:var(--pgink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:72rem;margin:0 auto;padding:2rem 1.1rem 4rem;}
+.intro{max-width:44rem;margin-bottom:2.5rem;}
+.eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 .6rem;}
+h1{margin:0 0 .8rem;font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.1;letter-spacing:-.025em;text-wrap:balance;}
+.intro p{margin:0 0 .7rem;color:var(--pgink2);}
+.intro a{color:var(--acc);}
+
+.grid{display:grid;gap:2.5rem;grid-template-columns:1fr;}
+@media (min-width:900px){ .grid{grid-template-columns:repeat(3,1fr);gap:1.8rem;} }
+.col{display:flex;flex-direction:column;gap:1rem;min-width:0;}
+.hd{display:flex;flex-direction:column;gap:.35rem;}
+.num{font-family:ui-monospace,monospace;font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--pgmut);}
+.hd h2{margin:0;font-size:1.25rem;letter-spacing:-.015em;}
+.hd .say{color:var(--pgink2);font-size:.9rem;}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.15rem;}
+.tags span{font-size:.7rem;padding:.2rem .5rem;border-radius:999px;border:1px solid var(--pgline);color:var(--pgmut);}
+
+.phone{
+  width:100%;max-width:20rem;margin:0 auto;
+  border:8px solid #1E211B;border-radius:30px;overflow:hidden;
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.9);
+  height:34rem;overflow-y:auto;scrollbar-width:none;
+}
+.phone::-webkit-scrollbar{display:none;}
+.note{font-size:.85rem;color:var(--pgmut);}
+.note b{color:var(--pgink2);font-weight:600;}
+
+.verdict{
+  margin-top:3rem;padding:1.4rem 1.5rem;
+  border:1px solid var(--pgline);border-left:3px solid var(--acc);
+  border-radius:0 14px 14px 0;background:var(--pg2);max-width:46rem;
+}
+.verdict h3{margin:0 0 .6rem;font-size:1.05rem;}
+.verdict p{margin:0 0 .7rem;color:var(--pgink2);font-size:.95rem;}
+.verdict p:last-child{margin:0;}
+.verdict strong{color:var(--pgink);}
+
+/* ============ 1 · BUFET ============ */
+.v1{background:#F2E8D5;color:#1B1A18;font-size:15px;}
+.v1 .top{
+  background:#C8202E;color:#F7EFE0;padding:.7rem .85rem;
+  display:flex;align-items:center;gap:.6rem;
+  border-bottom:4px solid #1B1A18;position:sticky;top:0;z-index:3;
+}
+.v1 .top img{width:2.1rem;height:2.1rem;border-radius:6px;border:2px solid #1B1A18;}
+.v1 .top .nm{font-family:'Alfa Slab One',Georgia,serif;font-size:1.05rem;letter-spacing:.01em;line-height:1.1;}
+.v1 .checks{
+  height:12px;
+  background-image:
+    linear-gradient(45deg,#1B1A18 25%,transparent 25%,transparent 75%,#1B1A18 75%),
+    linear-gradient(45deg,#1B1A18 25%,transparent 25%,transparent 75%,#1B1A18 75%);
+  background-size:12px 12px;background-position:0 0,6px 6px;background-color:#F2E8D5;
+  position:sticky;top:3.4rem;z-index:2;
+}
+.v1 .feed{padding:1rem .8rem 2rem;display:flex;flex-direction:column;gap:1.2rem;}
+.v1 .post{
+  background:#FBF5E8;border:3px solid #1B1A18;border-radius:3px;
+  box-shadow:5px 5px 0 #1B1A18;position:relative;
+}
+.v1 .pad{padding:.55rem;}
+.v1 .post img{width:100%;height:auto;display:block;border:2px solid #1B1A18;}
+.v1 .burst{
+  position:absolute;top:-.7rem;right:-.5rem;z-index:2;
+  width:3.6rem;height:3.6rem;display:grid;place-items:center;
+  background:#E8A317;color:#1B1A18;border:2px solid #1B1A18;
+  clip-path:polygon(50% 0,61% 18%,82% 12%,80% 34%,100% 44%,84% 58%,95% 78%,72% 78%,66% 100%,50% 86%,34% 100%,28% 78%,5% 78%,16% 58%,0 44%,20% 34%,18% 12%,39% 18%);
+  font-family:'Alfa Slab One',Georgia,serif;font-size:.56rem;text-align:center;line-height:1;
+  transform:rotate(10deg);
+}
+.v1 .in{padding:0 .75rem .8rem;}
+.v1 h3{font-family:'Alfa Slab One',Georgia,serif;margin:.55rem 0 .3rem;font-size:1rem;line-height:1.2;}
+.v1 p{margin:0;font-size:.85rem;color:#5A5348;}
+.v1 .cena{
+  display:inline-block;margin-top:.6rem;background:#0F7B7B;color:#F7EFE0;
+  border:2px solid #1B1A18;padding:.14rem .55rem;font-weight:800;font-size:.88rem;
+  transform:rotate(-1.5deg);
+}
+.v1 .cas{margin-top:.55rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8C8375;}
+
+/* ============ 2 · SEDMDESÁTKY ============ */
+.v2{background:#F5EBD8;color:#3A2413;font-size:15px;}
+.v2 .top{
+  padding:.75rem .85rem;display:flex;align-items:center;gap:.6rem;
+  background:linear-gradient(180deg,#D2601A,#E3B23C);
+  border-bottom:3px solid #4A2C17;position:sticky;top:0;z-index:3;
+}
+.v2 .top img{width:2.1rem;height:2.1rem;border-radius:50%;border:2px solid #4A2C17;}
+.v2 .top .nm{font-family:'Fugaz One',Impact,sans-serif;font-size:1.08rem;color:#3A2413;letter-spacing:.01em;}
+.v2 .feed{padding:1rem .8rem 2rem;display:flex;flex-direction:column;gap:1.1rem;}
+.v2 .post{
+  background:#FBF3E3;border:3px solid #4A2C17;border-radius:22px;overflow:hidden;position:relative;
+}
+.v2 .arc{height:10px;background:linear-gradient(90deg,#D2601A 33%,#E3B23C 33% 66%,#6B8E23 66%);}
+.v2 .post img{width:100%;height:auto;display:block;}
+.v2 .new{
+  position:absolute;top:1.15rem;left:.7rem;z-index:2;
+  background:#6B8E23;color:#FBF3E3;border:2px solid #4A2C17;
+  padding:.2rem .6rem;border-radius:999px;
+  font-family:'Fugaz One',Impact,sans-serif;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
+}
+.v2 .in{padding:.75rem .9rem .9rem;}
+.v2 h3{font-family:'Fugaz One',Impact,sans-serif;margin:0 0 .3rem;font-size:1.05rem;line-height:1.2;color:#D2601A;}
+.v2 p{margin:0;font-size:.86rem;color:#6B5236;}
+.v2 .cena{
+  display:inline-block;margin-top:.6rem;background:#4A2C17;color:#F5EBD8;
+  padding:.18rem .65rem;border-radius:999px;font-weight:800;font-size:.87rem;
+}
+.v2 .cas{margin-top:.5rem;font-size:.72rem;color:#9A8768;}
+
+/* ============ 3 · PLAKÁT ============ */
+.v3{background:#E6DFCD;color:#141210;font-size:15px;}
+.v3 .top{
+  background:#141210;color:#E6DFCD;padding:.7rem .85rem;
+  display:flex;align-items:center;gap:.6rem;position:sticky;top:0;z-index:3;
+  border-bottom:3px double #8C2B21;
+}
+.v3 .top img{width:2rem;height:2rem;}
+.v3 .top .nm{font-family:Anton,Impact,sans-serif;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;}
+.v3 .rule{height:6px;background:#8C2B21;border-bottom:2px solid #141210;position:sticky;top:3.35rem;z-index:2;}
+.v3 .feed{padding:.9rem .75rem 2rem;display:flex;flex-direction:column;gap:1rem;}
+.v3 .post{background:#F0EADA;border:2px solid #141210;position:relative;}
+.v3 .post::after{
+  content:"";position:absolute;inset:4px;border:1px solid #141210;pointer-events:none;
+}
+.v3 .pad{padding:.7rem;}
+.v3 .post img{width:100%;height:auto;display:block;filter:contrast(1.05) saturate(.92);}
+.v3 .new{
+  position:absolute;top:.85rem;right:.85rem;z-index:2;
+  background:#8C2B21;color:#F0EADA;padding:.2rem .55rem;
+  font-family:Anton,Impact,sans-serif;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+}
+.v3 .in{padding:0 1rem .95rem;text-align:center;}
+.v3 .kick{
+  font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#8C2B21;
+  border-bottom:1px solid #C4BCA6;padding-bottom:.35rem;margin-bottom:.45rem;
+}
+.v3 h3{
+  font-family:Anton,Impact,sans-serif;margin:0 0 .35rem;
+  font-size:1.22rem;line-height:1.05;letter-spacing:.02em;text-transform:uppercase;
+}
+.v3 p{margin:0;font-size:.83rem;color:#5A5344;}
+.v3 .cena{
+  display:inline-block;margin-top:.7rem;
+  font-family:Anton,Impact,sans-serif;font-size:1.05rem;letter-spacing:.03em;
+  border-top:2px solid #141210;border-bottom:2px solid #141210;padding:.1rem .6rem;
+}
+.v3 .cas{margin-top:.6rem;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#948C79;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="intro">
+    <p class="eyebrow">WEED420SHOP · kanál</p>
+    <h1>Street v retro Americe</h1>
+    <p>Vybral sis Street a řekl, že obchod je laděný do retro Ameriky. To je ale tři různé Ameriky — bufet z padesátek, sedmdesátky, a starý plakát. Každá vypadá úplně jinak.</p>
+    <p>Všechny tři drží červenou, žlutou a zelenou z loga, jen v tlumenějších, „vybledlých" odstínech, které retro dělají retro. <a href="./">Původní tři barevné směry jsou tady</a>.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ 1 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">RETRO 01</span>
+        <h2>Bufet</h2>
+        <span class="say">Padesátky. Chrom, šachovnice, cedule.</span>
+        <div class="tags"><span>krémová</span><span>třešňová</span><span>šachovnice</span></div>
+      </div>
+
+      <div class="phone v1">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <span class="nm">Weed420Shop</span>
+        </div>
+        <div class="checks"></div>
+        <div class="feed">
+          <div class="post">
+            <span class="burst">NOVÉ!</span>
+            <div class="pad"><img src="../img/produkt-3.jpg" width="1080" height="1440" alt=""></div>
+            <div class="in">
+              <h3>T.H.C. Indica Joint</h3>
+              <p>Předbalený cone v růžové tubě. True Hemp papírky.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">dnes 11:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="in">
+              <h3>Nová dodávka je na place</h3>
+              <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+              <div class="cas">čt 14:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="pad"><img src="../img/produkt-2.jpg" width="1080" height="1440" alt=""></div>
+            <div class="in">
+              <h3>T.H.C. Sativa Joint</h3>
+              <p>Předbalený cone v zelené tubě.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">20. 8.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Nejveselejší z trojice.</b> Hvězdice „NOVÉ!", cenovka jako v jídelníčku, tlustý černý obrys a tvrdý stín. <b>Riziko:</b> padesátky jsou spíš burger než konopí — může to působit dětsky.</p>
+    </div>
+
+    <!-- ============ 2 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">RETRO 02</span>
+        <h2>Sedmdesátky</h2>
+        <span class="say">Oranžová, hořčicová, avokádová.</span>
+        <div class="tags"><span>teplá</span><span>oblá</span><span>kulturně sedí</span></div>
+      </div>
+
+      <div class="phone v2">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <span class="nm">Weed420Shop</span>
+        </div>
+        <div class="feed">
+          <div class="post">
+            <div class="arc"></div>
+            <span class="new">Novinka</span>
+            <img src="../img/produkt-3.jpg" width="1080" height="1440" alt="">
+            <div class="in">
+              <h3>T.H.C. Indica Joint</h3>
+              <p>Předbalený cone v růžové tubě. True Hemp papírky.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">dnes 11:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="arc"></div>
+            <div class="in">
+              <h3>Nová dodávka je na place</h3>
+              <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+              <div class="cas">čt 14:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="arc"></div>
+            <img src="../img/produkt-2.jpg" width="1080" height="1440" alt="">
+            <div class="in">
+              <h3>T.H.C. Sativa Joint</h3>
+              <p>Předbalený cone v zelené tubě.</p>
+              <div><span class="cena">149 Kč / ks</span></div>
+              <div class="cas">20. 8.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Kulturně to sedí nejlíp.</b> Sedmdesátky jsou doba, ze které konopná estetika reálně vychází — oblé rohy, západ slunce v pruhu, hnědá a hořčicová. <b>Riziko:</b> je to nejdál od ostré grafiky jeho loga.</p>
+    </div>
+
+    <!-- ============ 3 ============ -->
+    <div class="col">
+      <div class="hd">
+        <span class="num">RETRO 03</span>
+        <h2>Plakát</h2>
+        <span class="say">Starý americký vývěsní plakát.</span>
+        <div class="tags"><span>úsporný</span><span>dospělý</span><span>čitelný</span></div>
+      </div>
+
+      <div class="phone v3">
+        <div class="top">
+          <img src="../img/znacka.png" alt="">
+          <span class="nm">Weed420Shop</span>
+        </div>
+        <div class="rule"></div>
+        <div class="feed">
+          <div class="post">
+            <span class="new">Novinka</span>
+            <div class="pad"><img src="../img/produkt-3.jpg" width="1080" height="1440" alt=""></div>
+            <div class="in">
+              <div class="kick">Předbalený joint</div>
+              <h3>T.H.C. Indica</h3>
+              <p>V růžové tubě. True Hemp papírky, 100% konopí.</p>
+              <div><span class="cena">149 Kč</span></div>
+              <div class="cas">dnes 11:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="in" style="padding-top:1rem">
+              <div class="kick">Oznámení</div>
+              <h3>Nová dodávka<br>je na place</h3>
+              <p>Doplnili jsme všechny tři varianty. Zastav se.</p>
+              <div class="cas">čt 14:33</div>
+            </div>
+          </div>
+          <div class="post">
+            <div class="pad"><img src="../img/produkt-2.jpg" width="1080" height="1440" alt=""></div>
+            <div class="in">
+              <div class="kick">Předbalený joint</div>
+              <h3>T.H.C. Sativa</h3>
+              <p>V zelené tubě.</p>
+              <div><span class="cena">149 Kč</span></div>
+              <div class="cas">20. 8.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note"><b>Nejstřídmější a nejdospělejší.</b> Vycentrovaný text, dvojitý rámeček, cena mezi linkami jako na staré ceduli. Fotka dostane nejvíc klidu. <b>Riziko:</b> je nejméně barevný z trojice.</p>
+    </div>
+
+  </div>
+
+  <div class="verdict">
+    <h3>Kdybych měl vybrat</h3>
+    <p><strong>Sedmdesátky.</strong> Ze všech tří to jediné není kostým — je to doba, ze které konopná kultura opravdu vychází, takže to na prodejně nebude působit jako nalepený nápad. Teplá krémová se navíc na displeji čte líp než čistě bílá a fotky na ní vypadají dobře i když nejsou perfektní.</p>
+    <p><strong>Plakát</strong> ber, pokud chce vypadat spíš jako zavedený krám než jako zábavný podnik. Je nejčitelnější a nejdéle vydrží, než omrzí.</p>
+    <p><strong>Bufet</strong> je nejveselejší, ale padesátky patří k hamburgerům a mléčným koktejlům — u konopí to může vyznít dětsky.</p>
+    <p>Zeptej se ho na jednu věc: <strong>čím přesně je ten obchod zařízený?</strong> Jestli tam má chrom a červené koženky, je to Bufet. Jestli dřevo, hnědou a oranžovou, jsou to Sedmdesátky. Ať vzhled appky sedí s tím, do čeho zákazník fyzicky vejde.</p>
+  </div>
+
+</div>
+</body>
+</html>
